@@ -1073,7 +1073,7 @@
       "strokeWidth": 1,
       "targets": [
         {
-          "expr": "sum(kube_pod_status_phase{phase!=\"Running\"}) OR on() vector(0)",
+          "expr": "sum(kube_pod_status_phase{phase!~\"Running|Succeeded\"}) OR on() vector(0)",
           "interval": "",
           "legendFormat": "Failed",
           "refId": "A"

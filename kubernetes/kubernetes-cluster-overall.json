@@ -66,7 +66,7 @@
       }
     ]
   },
-  "description": "Monitors Kubernetes cluster using Prometheus. Shows overall cluster or Node CPU / Memory / Filesystem  基于K8 Cluster Detail Dashboard 和 Kubernetes for Prometheus Dashboard CN 20201209 修改，调整了布局",
+  "description": "Monitors Kubernetes cluster using Prometheus. Shows overall cluster or Node CPU / Memory / Filesystem",
   "editable": true,
   "gnetId": 14518,
   "graphTooltip": 0,
@@ -77,7 +77,6 @@
     {
       "columns": [],
       "datasource": "${DS_PROMETHEUS}",
-      "description": "分区使用率、磁盘读取、磁盘写入、下载带宽、上传带宽，如果有多个网卡或者多个分区，是采集的使用率最高的网卡或者分区的数值。\n\n连接数：CurrEstab - 当前状态为 ESTABLISHED 或 CLOSE-WAIT 的 TCP 连接数。",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -101,7 +100,7 @@
       "styles": [
         {
           "$$hashKey": "object:1808",
-          "alias": "主机名",
+          "alias": "Node",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -122,7 +121,7 @@
         },
         {
           "$$hashKey": "object:1809",
-          "alias": "IP（链接到明细）",
+          "alias": "IP",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -134,7 +133,7 @@
           "decimals": 2,
           "link": true,
           "linkTargetBlank": false,
-          "linkTooltip": "浏览主机明细",
+          "linkTooltip": "Browse Host Details",
           "linkUrl": "d/9CWBz0bik/node-exporter?orgId=1&var-job=${job}&var-hostname=All&var-node=${__cell}&var-device=All&var-origin_prometheus=$origin_prometheus",
           "mappingType": 1,
           "pattern": "instance",
@@ -144,7 +143,7 @@
         },
         {
           "$$hashKey": "object:1810",
-          "alias": "内存",
+          "alias": "RAM",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -163,7 +162,7 @@
         },
         {
           "$$hashKey": "object:1811",
-          "alias": "CPU核",
+          "alias": "CPU Cores",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -181,7 +180,7 @@
         },
         {
           "$$hashKey": "object:1812",
-          "alias": " 运行时间",
+          "alias": "Uptime",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -199,7 +198,7 @@
         },
         {
           "$$hashKey": "object:1813",
-          "alias": "分区使用率*",
+          "alias": "Disk usage",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -220,7 +219,7 @@
         },
         {
           "$$hashKey": "object:1814",
-          "alias": "CPU使用率",
+          "alias": "CPU Usage",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -241,7 +240,7 @@
         },
         {
           "$$hashKey": "object:1815",
-          "alias": "内存使用率",
+          "alias": "Memory Usage",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -262,7 +261,7 @@
         },
         {
           "$$hashKey": "object:1816",
-          "alias": "磁盘读取*",
+          "alias": "Disk Read*",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -283,7 +282,7 @@
         },
         {
           "$$hashKey": "object:1817",
-          "alias": "磁盘写入*",
+          "alias": "Disk Write*",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -304,7 +303,7 @@
         },
         {
           "$$hashKey": "object:1818",
-          "alias": "下载带宽*",
+          "alias": "Download Bandwidth*",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -325,7 +324,7 @@
         },
         {
           "$$hashKey": "object:1819",
-          "alias": "上传带宽*",
+          "alias": "Upload Bandwidth*",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -346,7 +345,7 @@
         },
         {
           "$$hashKey": "object:1820",
-          "alias": "5m负载",
+          "alias": "5m load",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -364,7 +363,7 @@
         },
         {
           "$$hashKey": "object:1821",
-          "alias": "连接数",
+          "alias": "Num Connections",
           "align": "auto",
           "colorMode": "cell",
           "colors": [
@@ -427,7 +426,7 @@
           "format": "table",
           "instant": true,
           "interval": "",
-          "legendFormat": "主机名",
+          "legendFormat": "Node Name",
           "refId": "A"
         },
         {
@@ -436,7 +435,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "运行时间",
+          "legendFormat": "Uptime",
           "refId": "D"
         },
         {
@@ -445,7 +444,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "总内存",
+          "legendFormat": "RAM",
           "refId": "B"
         },
         {
@@ -454,7 +453,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "总核数",
+          "legendFormat": "CPU Cores",
           "refId": "C"
         },
         {
@@ -462,7 +461,7 @@
           "format": "table",
           "instant": true,
           "interval": "",
-          "legendFormat": "5分钟负载",
+          "legendFormat": "5 mins load",
           "refId": "L"
         },
         {
@@ -471,7 +470,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "CPU使用率",
+          "legendFormat": "CPU Usage",
           "refId": "F"
         },
         {
@@ -480,7 +479,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "内存使用率",
+          "legendFormat": "Memory Usage",
           "refId": "G"
         },
         {
@@ -489,7 +488,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "分区使用率",
+          "legendFormat": "Disk Usage",
           "refId": "E"
         },
         {
@@ -498,7 +497,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "最大读取",
+          "legendFormat": "Max Read",
           "refId": "H"
         },
         {
@@ -507,7 +506,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "最大写入",
+          "legendFormat": "Max Write",
           "refId": "I"
         },
         {
@@ -516,7 +515,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "连接数",
+          "legendFormat": "Num Connections",
           "refId": "M"
         },
         {
@@ -534,7 +533,7 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "下载带宽",
+          "legendFormat": "Download Bandwidth",
           "refId": "J"
         },
         {
@@ -543,13 +542,13 @@
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "上传带宽",
+          "legendFormat": "Upload Bandwidth",
           "refId": "K"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "服务器资源总览表(Node Overview)",
+      "title": "Node Overview",
       "transform": "table",
       "type": "table-old"
     },
@@ -2025,7 +2024,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "节点就绪情况(Node Readiness)",
+      "title": "Node Readiness",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2044,7 +2043,7 @@
           "$$hashKey": "object:5162",
           "decimals": 0,
           "format": "short",
-          "label": "kubelet就绪情况",
+          "label": "kubelet readiness",
           "logBase": 1,
           "max": "2",
           "min": "0",
@@ -2130,7 +2129,7 @@
           "refId": "B"
         }
       ],
-      "title": "Node运行pod数量",
+      "title": "Node Pods",
       "type": "bargauge"
     },
     {
