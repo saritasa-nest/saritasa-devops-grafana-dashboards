@@ -1924,7 +1924,7 @@
       "pluginVersion": "7.4.3",
       "targets": [
         {
-          "expr": "count(rate(kube_pod_container_status_restarts_total{job=\"kube-state-metrics\"}[5m]) * 60 * 5 > 0)",
+          "expr": "count(rate(kube_pod_container_status_restarts_total{job=\"kubernetes-service-endpoints\"}[5m]) * 60 * 5 > 0)",
           "format": "table",
           "interval": "",
           "legendFormat": "",
@@ -1932,7 +1932,7 @@
           "refId": "A"
         }
       ],
-      "title": "Pod CrashLooping",
+      "title": "Pod Crash Looping",
       "type": "stat"
     },
     {
@@ -2457,7 +2457,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "非正常运行Pods",
+      "title": "Pods running abnormally",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2547,7 +2547,7 @@
       "pluginVersion": "7.4.3",
       "targets": [
         {
-          "expr": "sum(kubelet_running_container_count)",
+          "expr": "sum(kube_pod_info{})",
           "format": "table",
           "interval": "",
           "legendFormat": "",
@@ -2705,7 +2705,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "不调度节点",
+      "title": "Unscheduled pods",
       "tooltip": {
         "shared": false,
         "sort": 0,
