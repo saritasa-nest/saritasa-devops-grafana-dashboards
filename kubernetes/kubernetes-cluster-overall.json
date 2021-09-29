@@ -2547,7 +2547,7 @@
       "pluginVersion": "7.4.3",
       "targets": [
         {
-          "expr": "sum(kube_pod_info{})",
+          "expr": "sum(kubelet_running_containers)",
           "format": "table",
           "interval": "",
           "legendFormat": "",
