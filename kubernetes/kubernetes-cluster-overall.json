@@ -7608,6 +7608,7 @@
   },
   "timezone": "browser",
   "title": "Kubernetes - Cluster Overall Dashboard",
+  "tags": ["kubernetes"],
   "uid": "jcdpwbcia",
   "version": 1
 }
