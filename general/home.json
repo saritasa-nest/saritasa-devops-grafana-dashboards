@@ -433,6 +433,68 @@
       "type": "stat"
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.75
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 20,
+        "x": 4,
+        "y": 6
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 14
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sort_desc(1-(kubelet_volume_stats_available_bytes/kubelet_volume_stats_capacity_bytes))",
+          "interval": "",
+          "legendFormat": "{{ persistentvolumeclaim }}",
+          "refId": "A"
+        }
+      ],
+      "title": "PVC Usage",
+      "type": "stat"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -444,7 +506,7 @@
         "h": 10,
         "w": 10,
         "x": 4,
-        "y": 6
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 12,
@@ -557,7 +619,7 @@
         "h": 10,
         "w": 10,
         "x": 14,
-        "y": 6
+        "y": 11
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -668,7 +730,7 @@
         "h": 8,
         "w": 10,
         "x": 4,
-        "y": 16
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 14,
@@ -770,7 +832,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "description": "Total time taken for nginx and upstream servers to process a request and send a response",
+      "description": "The time spent on receiving the response from the upstream server",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -783,10 +845,10 @@
         "h": 8,
         "w": 10,
         "x": 14,
-        "y": 16
+        "y": 21
       },
       "hiddenSeries": false,
-      "id": 22,
+      "id": 24,
       "legend": {
         "avg": false,
         "current": false,
@@ -814,20 +876,22 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_request_duration_seconds_bucket{}[1m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[1m]\n    )\n  )\n)",
+          "instant": false,
           "interval": "",
+          "intervalFactor": 1,
           "legendFormat": ".5",
           "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_request_duration_seconds_bucket{}[1m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_response_duration_seconds_bucket{\n      }[1m]\n    )\n  )\n)",
           "interval": "",
           "legendFormat": ".95",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_request_duration_seconds_bucket{\n        ingress =~ \"$ingress\"\n      }[1m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n        ingress =~ \"$ingress\"\n      }[1m]\n    )\n  )\n)",
           "interval": "",
           "legendFormat": ".99",
           "refId": "A"
@@ -837,7 +901,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Ingress Request Handling Time",
+      "title": "Ingress Upstream Response Time",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -853,7 +917,7 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:839",
+          "$$hashKey": "object:993",
           "format": "s",
           "label": null,
           "logBase": 1,
@@ -862,7 +926,7 @@
           "show": true
         },
         {
-          "$$hashKey": "object:840",
+          "$$hashKey": "object:994",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -892,7 +956,7 @@
         "h": 8,
         "w": 10,
         "x": 4,
-        "y": 24
+        "y": 29
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -1000,7 +1064,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "description": "The time spent on receiving the response from the upstream server",
+      "description": "Total time taken for nginx and upstream servers to process a request and send a response",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -1013,10 +1077,10 @@
         "h": 8,
         "w": 10,
         "x": 14,
-        "y": 24
+        "y": 29
       },
       "hiddenSeries": false,
-      "id": 24,
+      "id": 22,
       "legend": {
         "avg": false,
         "current": false,
@@ -1044,22 +1108,20 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[1m]\n    )\n  )\n)",
-          "instant": false,
+          "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_request_duration_seconds_bucket{}[1m]\n    )\n  )\n)",
           "interval": "",
-          "intervalFactor": 1,
           "legendFormat": ".5",
           "refId": "D"
         },
         {
           "exemplar": true,
-          "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_response_duration_seconds_bucket{\n      }[1m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_request_duration_seconds_bucket{}[1m]\n    )\n  )\n)",
           "interval": "",
           "legendFormat": ".95",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n        ingress =~ \"$ingress\"\n      }[1m]\n    )\n  )\n)",
+          "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_request_duration_seconds_bucket{\n        ingress =~ \"$ingress\"\n      }[1m]\n    )\n  )\n)",
           "interval": "",
           "legendFormat": ".99",
           "refId": "A"
@@ -1069,7 +1131,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Ingress Upstream Response Time",
+      "title": "Ingress Request Handling Time",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1085,7 +1147,7 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:993",
+          "$$hashKey": "object:839",
           "format": "s",
           "label": null,
           "logBase": 1,
@@ -1094,7 +1156,7 @@
           "show": true
         },
         {
-          "$$hashKey": "object:994",
+          "$$hashKey": "object:840",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1140,7 +1202,7 @@
         "h": 7,
         "w": 20,
         "x": 4,
-        "y": 32
+        "y": 37
       },
       "id": 26,
       "options": {
