@@ -27,7 +27,8 @@
     "fiscalYearStartMonth": 0,
     "gnetId": 14759,
     "graphTooltip": 1,
-    "iteration": 1657228164144,
+    "id": 17,
+    "iteration": 1657228322917,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -54,24 +55,24 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "continuous-RdYlGr"
+            "mode": "continuous-RdYlGr"
             },
             "decimals": 2,
             "mappings": [],
             "max": 1,
             "min": 0,
             "thresholds": {
-                "mode": "percentage",
-                "steps": [
-                    {
-                        "color": "red",
-                        "value": null
-                    },
-                    {
-                        "color": "green",
-                        "value": 99.95
-                    }
-                ]
+            "mode": "percentage",
+            "steps": [
+                {
+                    "color": "red",
+                    "value": null
+                },
+                {
+                    "color": "green",
+                    "value": 99.95
+                }
+            ]
             },
             "unit": "percentunit"
         },
@@ -88,7 +89,7 @@
         "orientation": "auto",
         "reduceOptions": {
             "calcs": [
-                "lastNotNull"
+            "lastNotNull"
             ],
             "fields": "",
             "values": false
@@ -101,16 +102,16 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "expr": "avg_over_time(\n  min(ceil(\n    kube_deployment_status_replicas_available{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"} /\n    kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"}\n  ))\n[$__range:1m])",
             "refId": "A"
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "expr": "avg_over_time(\n  min(ceil(\n    kube_statefulset_status_replicas_ready{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"} /\n    kube_statefulset_status_replicas{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"}\n  ))\n[$__range:1m])",
             "refId": "B"
@@ -128,55 +129,55 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "thresholds"
+            "mode": "thresholds"
             },
             "custom": {
-                "fillOpacity": 100,
-                "lineWidth": 3,
-                "spanNulls": false
+            "fillOpacity": 100,
+            "lineWidth": 3,
+            "spanNulls": false
             },
             "mappings": [
-                {
-                    "options": {
-                        "0": {
-                            "index": 1,
-                            "text": "None"
-                        },
-                        "1": {
-                            "index": 0,
-                            "text": "All"
-                        }
+            {
+                "options": {
+                    "0": {
+                        "index": 1,
+                        "text": "None"
                     },
-                    "type": "value"
+                    "1": {
+                        "index": 0,
+                        "text": "All"
+                    }
                 },
-                {
-                    "options": {
-                        "from": 0,
-                        "result": {
-                            "index": 2,
-                            "text": "Some"
-                        },
-                        "to": 1
+                "type": "value"
+            },
+            {
+                "options": {
+                    "from": 0,
+                    "result": {
+                        "index": 2,
+                        "text": "Some"
                     },
-                    "type": "range"
-                }
+                    "to": 1
+                },
+                "type": "range"
+            }
             ],
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "red",
-                        "value": null
-                    },
-                    {
-                        "color": "yellow",
-                        "value": 0.1
-                    },
-                    {
-                        "color": "green",
-                        "value": 1
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "red",
+                    "value": null
+                },
+                {
+                    "color": "yellow",
+                    "value": 0.1
+                },
+                {
+                    "color": "green",
+                    "value": 1
+                }
+            ]
             },
             "unit": "percentunit"
         },
@@ -206,8 +207,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "max(\n  kube_deployment_status_replicas_available{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"} /\n  kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"}\n) by (deployment)",
@@ -216,8 +217,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "max(\n  kube_statefulset_status_replicas_ready{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"} /\n  kube_statefulset_status_replicas{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"}\n) by (statefulset)",
@@ -237,50 +238,50 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "fixedColor": "red",
-                "mode": "fixed"
+            "fixedColor": "red",
+            "mode": "fixed"
             },
             "custom": {
-                "axisGridShow": true,
-                "axisLabel": "",
-                "axisPlacement": "left",
-                "barAlignment": 0,
-                "drawStyle": "points",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 8,
-                "scaleDistribution": {
-                    "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                },
-                "thresholdsStyle": {
-                    "mode": "off"
-                }
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "left",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 8,
+            "scaleDistribution": {
+                "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+                "group": "A",
+                "mode": "none"
+            },
+            "thresholdsStyle": {
+                "mode": "off"
+            }
             },
             "decimals": 0,
             "mappings": [],
             "min": 0,
             "noValue": "0",
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "green",
+                    "value": null
+                }
+            ]
             }
         },
         "overrides": []
@@ -307,8 +308,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "sum(rate(kube_pod_container_status_restarts_total{namespace=\"$namespace\",container=~\".*$service.*\"}[5m])) * 300 > 0",
@@ -324,65 +325,65 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "palette-classic"
+            "mode": "palette-classic"
             },
             "custom": {
-                "axisLabel": "",
-                "axisPlacement": "hidden",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 100,
-                "gradientMode": "none",
-                "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 0,
-                "pointSize": 5,
-                "scaleDistribution": {
-                    "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                },
-                "thresholdsStyle": {
-                    "mode": "off"
-                }
+            "axisLabel": "",
+            "axisPlacement": "hidden",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+                "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+                "group": "A",
+                "mode": "none"
+            },
+            "thresholdsStyle": {
+                "mode": "off"
+            }
             },
             "decimals": 0,
             "mappings": [],
             "min": 0,
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 80
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "green",
+                    "value": null
+                },
+                {
+                    "color": "red",
+                    "value": 80
+                }
+            ]
             }
         },
         "overrides": [
             {
-                "matcher": {
-                    "id": "byType",
-                    "options": "time"
-                },
-                "properties": [
-                    {
-                        "id": "custom.axisPlacement",
-                        "value": "auto"
-                    }
-                ]
+            "matcher": {
+                "id": "byType",
+                "options": "time"
+            },
+            "properties": [
+                {
+                    "id": "custom.axisPlacement",
+                    "value": "auto"
+                }
+            ]
             }
         ]
         },
@@ -407,8 +408,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "max(label_replace(kube_pod_container_info{namespace=\"$namespace\",container=\"$service\"}, \"version\", \"$1\", \"image\", \".*:(.*)\")) by (version)",
@@ -442,113 +443,113 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "palette-classic"
+            "mode": "palette-classic"
             },
             "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                    "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                },
-                "thresholdsStyle": {
-                    "mode": "off"
-                }
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+                "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+                "group": "A",
+                "mode": "none"
+            },
+            "thresholdsStyle": {
+                "mode": "off"
+            }
             },
             "decimals": 0,
             "links": [],
             "mappings": [],
             "min": 0,
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 80
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "green",
+                    "value": null
+                },
+                {
+                    "color": "red",
+                    "value": 80
+                }
+            ]
             },
             "unit": "bytes"
         },
         "overrides": [
             {
-                "matcher": {
-                    "id": "byName",
-                    "options": "Request"
-                },
-                "properties": [
-                    {
-                        "id": "color",
-                        "value": {
-                            "fixedColor": "#5794F2",
-                            "mode": "fixed"
-                        }
-                    },
-                    {
-                        "id": "custom.fillOpacity",
-                        "value": 0
-                    },
-                    {
-                        "id": "custom.lineStyle",
-                        "value": {
-                            "dash": [
-                                10,
-                                10
-                            ],
-                            "fill": "dash"
-                        }
+            "matcher": {
+                "id": "byName",
+                "options": "Request"
+            },
+            "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                        "fixedColor": "#5794F2",
+                        "mode": "fixed"
                     }
-                ]
+                },
+                {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                },
+                {
+                    "id": "custom.lineStyle",
+                    "value": {
+                        "dash": [
+                            10,
+                            10
+                        ],
+                        "fill": "dash"
+                    }
+                }
+            ]
             },
             {
-                "matcher": {
-                    "id": "byName",
-                    "options": "Limit"
-                },
-                "properties": [
-                    {
-                        "id": "color",
-                        "value": {
-                            "fixedColor": "#F2495C",
-                            "mode": "fixed"
-                        }
-                    },
-                    {
-                        "id": "custom.fillOpacity",
-                        "value": 0
-                    },
-                    {
-                        "id": "custom.lineStyle",
-                        "value": {
-                            "dash": [
-                                10,
-                                10
-                            ],
-                            "fill": "dash"
-                        }
+            "matcher": {
+                "id": "byName",
+                "options": "Limit"
+            },
+            "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                        "fixedColor": "#F2495C",
+                        "mode": "fixed"
                     }
-                ]
+                },
+                {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                },
+                {
+                    "id": "custom.lineStyle",
+                    "value": {
+                        "dash": [
+                            10,
+                            10
+                        ],
+                        "fill": "dash"
+                    }
+                }
+            ]
             }
         ]
         },
@@ -563,10 +564,10 @@
         "options": {
         "legend": {
             "calcs": [
-                "min",
-                "max",
-                "mean",
-                "last"
+            "min",
+            "max",
+            "mean",
+            "last"
             ],
             "displayMode": "table",
             "placement": "bottom"
@@ -580,8 +581,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "max(container_memory_working_set_bytes{namespace=\"$namespace\",container=\"$service\"}) by (pod) != 0",
@@ -591,8 +592,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_requests{resource=\"memory\",namespace=\"$namespace\",container=\"$service\"})",
@@ -601,8 +602,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_limits{resource=\"memory\",namespace=\"$namespace\",container=\"$service\"})",
@@ -622,112 +623,112 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "palette-classic"
+            "mode": "palette-classic"
             },
             "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                    "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                },
-                "thresholdsStyle": {
-                    "mode": "off"
-                }
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+                "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+                "group": "A",
+                "mode": "none"
+            },
+            "thresholdsStyle": {
+                "mode": "off"
+            }
             },
             "links": [],
             "mappings": [],
             "min": 0,
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 80
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "green",
+                    "value": null
+                },
+                {
+                    "color": "red",
+                    "value": 80
+                }
+            ]
             },
             "unit": "percentunit"
         },
         "overrides": [
             {
-                "matcher": {
-                    "id": "byName",
-                    "options": "Request"
-                },
-                "properties": [
-                    {
-                        "id": "color",
-                        "value": {
-                            "fixedColor": "#5794F2",
-                            "mode": "fixed"
-                        }
-                    },
-                    {
-                        "id": "custom.fillOpacity",
-                        "value": 0
-                    },
-                    {
-                        "id": "custom.lineStyle",
-                        "value": {
-                            "dash": [
-                                10,
-                                10
-                            ],
-                            "fill": "dash"
-                        }
+            "matcher": {
+                "id": "byName",
+                "options": "Request"
+            },
+            "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                        "fixedColor": "#5794F2",
+                        "mode": "fixed"
                     }
-                ]
+                },
+                {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                },
+                {
+                    "id": "custom.lineStyle",
+                    "value": {
+                        "dash": [
+                            10,
+                            10
+                        ],
+                        "fill": "dash"
+                    }
+                }
+            ]
             },
             {
-                "matcher": {
-                    "id": "byName",
-                    "options": "Limit"
-                },
-                "properties": [
-                    {
-                        "id": "color",
-                        "value": {
-                            "fixedColor": "#F2495C",
-                            "mode": "fixed"
-                        }
-                    },
-                    {
-                        "id": "custom.fillOpacity",
-                        "value": 0
-                    },
-                    {
-                        "id": "custom.lineStyle",
-                        "value": {
-                            "dash": [
-                                10,
-                                10
-                            ],
-                            "fill": "dash"
-                        }
+            "matcher": {
+                "id": "byName",
+                "options": "Limit"
+            },
+            "properties": [
+                {
+                    "id": "color",
+                    "value": {
+                        "fixedColor": "#F2495C",
+                        "mode": "fixed"
                     }
-                ]
+                },
+                {
+                    "id": "custom.fillOpacity",
+                    "value": 0
+                },
+                {
+                    "id": "custom.lineStyle",
+                    "value": {
+                        "dash": [
+                            10,
+                            10
+                        ],
+                        "fill": "dash"
+                    }
+                }
+            ]
             }
         ]
         },
@@ -742,10 +743,10 @@
         "options": {
         "legend": {
             "calcs": [
-                "min",
-                "max",
-                "mean",
-                "last"
+            "min",
+            "max",
+            "mean",
+            "last"
             ],
             "displayMode": "table",
             "placement": "bottom"
@@ -759,8 +760,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "max(rate(container_cpu_usage_seconds_total{namespace=\"$namespace\",container=\"$service\"}[$__rate_interval])) by (pod) != 0",
@@ -770,8 +771,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_requests{resource=\"cpu\",namespace=\"$namespace\",container=\"$service\"})",
@@ -780,8 +781,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_limits{resource=\"cpu\",namespace=\"$namespace\",container=\"$service\"})",
@@ -839,8 +840,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "sum(increase(nginx_ingress_controller_response_duration_seconds_bucket{namespace=\"$namespace\",service=~\"$service|.*$service.*\"}[$__rate_interval])) by (le)",
@@ -850,8 +851,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "sum(increase(istio_request_duration_milliseconds_bucket{destination_service_namespace=\"$namespace\",destination_service_name=\"$service\",reporter=\"source\"}[$__rate_interval])) by (le)",
@@ -886,51 +887,51 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "palette-classic"
+            "mode": "palette-classic"
             },
             "custom": {
-                "axisLabel": "Requests / second",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 10,
-                "gradientMode": "none",
-                "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                    "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": false,
-                "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                },
-                "thresholdsStyle": {
-                    "mode": "off"
-                }
+            "axisLabel": "Requests / second",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+                "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+                "group": "A",
+                "mode": "none"
+            },
+            "thresholdsStyle": {
+                "mode": "off"
+            }
             },
             "links": [],
             "mappings": [],
             "min": 0,
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 80
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "green",
+                    "value": null
+                },
+                {
+                    "color": "red",
+                    "value": 80
+                }
+            ]
             }
         },
         "overrides": []
@@ -946,7 +947,7 @@
         "options": {
         "legend": {
             "calcs": [
-                "mean"
+            "mean"
             ],
             "displayMode": "table",
             "placement": "right"
@@ -960,8 +961,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "sum(rate(nginx_ingress_controller_requests{namespace=\"$namespace\",service=~\"$service|.*$service.*\"}[$__rate_interval])) by (method, status)",
@@ -970,8 +971,8 @@
         },
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "exemplar": false,
             "expr": "sum(rate(istio_requests_total{destination_service_namespace=\"$namespace\",destination_service_name=\"$service\",reporter=\"source\"}[$__rate_interval])) by (response_code)",
@@ -1005,8 +1006,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "loki",
-                "uid": "loki"
+            "type": "loki",
+            "uid": "loki"
             },
             "expr": "{namespace=\"$namespace\", container=\"$service\", level=~\"$loglevel\"}",
             "refId": "A"
@@ -1037,50 +1038,50 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "palette-classic"
+            "mode": "palette-classic"
             },
             "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                    "legend": false,
-                    "tooltip": false,
-                    "viz": false
-                },
-                "lineInterpolation": "smooth",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                    "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                    "group": "A",
-                    "mode": "none"
-                },
-                "thresholdsStyle": {
-                    "mode": "off"
-                }
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+                "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+                "group": "A",
+                "mode": "none"
+            },
+            "thresholdsStyle": {
+                "mode": "off"
+            }
             },
             "mappings": [],
             "noValue": "HAS NO PROBE",
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 10
-                    }
-                ]
+            "mode": "absolute",
+            "steps": [
+                {
+                    "color": "green",
+                    "value": null
+                },
+                {
+                    "color": "red",
+                    "value": 10
+                }
+            ]
             },
             "unit": "s"
         },
@@ -1096,9 +1097,9 @@
         "options": {
         "legend": {
             "calcs": [
-                "min",
-                "max",
-                "mean"
+            "min",
+            "max",
+            "mean"
             ],
             "displayMode": "table",
             "placement": "bottom"
@@ -1111,8 +1112,8 @@
         "targets": [
         {
             "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
             },
             "editorMode": "code",
             "expr": "sum(probe_http_duration_seconds{service=\"$service\"}) by (component,$service)",
@@ -1132,34 +1133,34 @@
         "fieldConfig": {
         "defaults": {
             "color": {
-                "mode": "thresholds"
+            "mode": "thresholds"
             },
             "mappings": [
-                {
-                    "options": {
-                        "pattern": "(.*)\\?(.*)",
-                        "result": {
-                            "index": 0,
-                            "text": "$1"
-                        }
-                    },
-                    "type": "regex"
-                }
+            {
+                "options": {
+                    "pattern": "(.*)\\?(.*)",
+                    "result": {
+                        "index": 0,
+                        "text": "$1"
+                    }
+                },
+                "type": "regex"
+            }
             ],
             "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                    {
-                        "color": "green",
-                        "value": null
-                    },
-                    {
-                        "color": "red",
-                        "value": 0
-                },
+            "mode": "absolute",
+            "steps": [
                 {
                     "color": "green",
-                    "value": 1
+                    "value": null
+                },
+                {
+                    "color": "red",
+                    "value": 0
+                },
+                {
+                "color": "green",
+                "value": 1
                 }
             ]
         }
@@ -1220,8 +1221,8 @@
         "mappings": [
             {
                 "options": {
-                    "pattern": "(.*)\\?(.*)",
-                    "result": {
+                "pattern": "(.*)\\?(.*)",
+                "result": {
                     "index": 0,
                     "text": "$1"
                 }
@@ -1327,8 +1328,8 @@
         {
         "current": {
             "selected": true,
-            "text": "backend",
-            "value": "backend"
+            "text": "frontend",
+            "value": "frontend"
         },
         "datasource": {
             "type": "prometheus",
@@ -1358,13 +1359,9 @@
         {
         "allValue": ".*",
         "current": {
-            "selected": true,
-            "text": [
-                "All"
-            ],
-            "value": [
-                "$__all"
-            ]
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
         },
         "datasource": {
             "type": "loki",
