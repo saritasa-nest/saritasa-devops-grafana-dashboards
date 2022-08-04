@@ -30,7 +30,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 3,
@@ -44,7 +44,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "gridPos": {
         "h": 41,
@@ -72,7 +72,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "description": "Alerts",
       "fieldConfig": {
@@ -125,11 +125,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
           "expr": "alertmanager_alerts{state=\"active\"}",
+          "hide": false,
           "interval": "",
           "legendFormat": "Active Alerts",
           "range": true,
@@ -140,10 +141,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -193,6 +191,10 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(kube_node_status_condition{condition=\"Ready\",status!=\"true\"}>0)",
           "format": "table",
@@ -208,7 +210,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -257,6 +259,10 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(kube_pod_status_phase{namespace=~\".*\", phase=\"Pending\"})",
           "format": "table",
@@ -272,7 +278,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -322,6 +328,10 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "count(rate(kube_pod_container_status_restarts_total{job=\"kubernetes-service-endpoints\"}[5m]) * 60 * 5 > 0)",
           "format": "table",
@@ -337,7 +347,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -387,6 +397,10 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum(kube_pod_status_phase{namespace=~\".*\", phase=\"Running\"})",
           "format": "table",
@@ -467,7 +481,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -519,6 +533,10 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sort_desc(1-(kubelet_volume_stats_available_bytes/kubelet_volume_stats_capacity_bytes))",
           "interval": "",
@@ -536,7 +554,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -577,6 +595,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{id=\"/\"}) / sum (machine_memory_bytes{}) * 100",
           "format": "time_series",
@@ -588,6 +610,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum (container_memory_working_set_bytes{id=\"/\"}) by (instance) / sum (machine_memory_bytes) by (instance) * 100",
           "format": "time_series",
@@ -639,7 +665,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "decimals": 2,
       "editable": true,
@@ -692,6 +718,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "round(sum(irate(nginx_ingress_controller_requests{controller_namespace=~\"ingress-nginx\"}[2m])) by (ingress), 0.001)",
           "format": "time_series",
@@ -745,7 +775,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "fill": 1,
       "fillGradient": 0,
@@ -785,6 +815,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "sum (rate (container_cpu_usage_seconds_total{id=\"/\"}[5m])) / sum (machine_cpu_cores{})",
           "format": "time_series",
           "hide": false,
@@ -795,10 +829,14 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "sum (rate (container_cpu_usage_seconds_total{id=\"/\"}[5m])) by (instance) / sum (machine_cpu_cores) by (instance)",
           "format": "time_series",
-          "hide": true,
+          "hide": false,
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
@@ -847,7 +885,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "description": "The time spent on receiving the response from the upstream server",
       "fieldConfig": {
@@ -892,6 +930,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[1m]\n    )\n  )\n)",
           "instant": false,
@@ -901,6 +943,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_response_duration_seconds_bucket{\n      }[1m]\n    )\n  )\n)",
           "interval": "",
@@ -908,6 +954,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n        ingress =~ \"$ingress\"\n      }[1m]\n    )\n  )\n)",
           "interval": "",
           "legendFormat": ".99",
@@ -953,7 +1003,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "decimals": 2,
       "editable": true,
@@ -1003,6 +1053,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "sum (rate (container_network_receive_bytes_total{}[5m]))",
           "format": "time_series",
           "interval": "10s",
@@ -1013,6 +1067,10 @@
           "step": 10
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "- sum (rate (container_network_transmit_bytes_total{}[5m]))",
           "format": "time_series",
           "interval": "10s",
@@ -1063,7 +1121,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "description": "Total time taken for nginx and upstream servers to process a request and send a response",
       "fieldConfig": {
@@ -1108,6 +1166,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_request_duration_seconds_bucket{}[1m]\n    )\n  )\n)",
           "interval": "",
@@ -1115,6 +1177,10 @@
           "refId": "D"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "exemplar": true,
           "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_request_duration_seconds_bucket{}[1m]\n    )\n  )\n)",
           "interval": "",
@@ -1122,6 +1188,10 @@
           "refId": "B"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_request_duration_seconds_bucket{\n        ingress =~ \"$ingress\"\n      }[1m]\n    )\n  )\n)",
           "interval": "",
           "legendFormat": ".99",
@@ -1241,6 +1311,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

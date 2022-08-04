@@ -132,7 +132,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "decimals": 1,
       "description": "Shows how many times a command is executed per second on average during the selected interval.",
@@ -309,7 +309,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "exemplar": true,
           "expr": "mongodb_mongod_connections{instance=\"$host\", state=\"current\"} or\nmongodb_mongos_connections{instance=\"$host\", state=\"current\"} or\nmongodb_connections{instance=\"$host\", state=\"current\"}",
@@ -368,7 +368,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "description": "Helps identify why connections are increasing. Shows active cursors compared to cursors being automatically killed after 10 minutes due to an application not closing the connection.",
       "editable": true,
@@ -477,7 +477,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "description": "When used in combination with 'Command Operations', this graph can help identify write amplification. For example, when one insert or update command actually inserts or updates hundreds, thousands, or even millions of documents.",
       "editable": true,
@@ -585,7 +585,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "description": "Any number of queued operations for long periods of time is an indication of possible issues. Find the cause and fix it before requests get stuck in the queue.",
       "editable": true,
@@ -693,7 +693,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "decimals": 2,
       "editable": true,
@@ -808,7 +808,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -960,7 +960,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "exemplar": true,
           "expr": "rate(mongodb_mongod_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongod_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\"}[5m]) or\nrate(mongodb_mongos_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongos_metrics_get_last_error_wtime_total_milliseconds{instance=\"$host\"}[5m])",
@@ -1069,7 +1069,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "exemplar": true,
           "expr": "rate(mongodb_mongod_metrics_get_last_error_wtime_num_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongod_metrics_get_last_error_wtime_num_total{instance=\"$host\"}[5m]) or\nrate(mongodb_mongos_metrics_get_last_error_wtime_num_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongos_metrics_get_last_error_wtime_num_total{instance=\"$host\"}[5m])",
@@ -1084,7 +1084,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "exemplar": true,
           "expr": "rate(mongodb_mongod_metrics_get_last_error_wtimeouts_total{instance=\"$host\"}[$interval]) or\nirate(mongodb_mongod_metrics_get_last_error_wtimeouts_total{instance=\"$host\"}[5m]) or\nrate(mongodb_mongos_metrics_get_last_error_wtimeouts_total{instance=\"$host\"}[$interval]) or\nirate(mongodb_mongos_metrics_get_last_error_wtimeouts_total{instance=\"$host\"}[5m])",
@@ -1194,7 +1194,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "exemplar": true,
           "expr": "rate(mongodb_mongod_asserts_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongod_asserts_total{instance=\"$host\"}[5m]) or\nrate(mongodb_mongos_asserts_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongos_asserts_total{instance=\"$host\"}[5m]) or\nrate(mongodb_asserts_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_asserts_total{instance=\"$host\"}[5m])",
@@ -1300,7 +1300,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "exemplar": true,
           "expr": "rate(mongodb_mongod_extra_info_page_faults_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongod_extra_info_page_faults_total{instance=\"$host\"}[5m]) or\nrate(mongodb_mongos_extra_info_page_faults_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_mongos_extra_info_page_faults_total{instance=\"$host\"}[5m]) or\nrate(mongodb_extra_info_page_faults_total{instance=\"$host\"}[$interval]) or \nirate(mongodb_extra_info_page_faults_total{instance=\"$host\"}[5m])",
@@ -1372,7 +1372,7 @@
           "text": "auto",
           "value": "$__auto_interval_interval"
         },
-        "datasource": "PBFA97CFB590B2093",
+        "datasource": "prometheus",
         "hide": 0,
         "includeAll": false,
         "label": "Interval",
@@ -1435,7 +1435,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "definition": "",
         "hide": 0,
@@ -1465,7 +1465,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "definition": "",
         "hide": 0,

@@ -34,7 +34,7 @@
     "panels": [
     {
         "collapsed": false,
-        "datasource": "PBFA97CFB590B2093",
+        "datasource": "prometheus",
         "gridPos": {
         "h": 1,
         "w": 24,
@@ -49,7 +49,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "Average uptime of the service in the selected time range",
         "fieldConfig": {
@@ -103,7 +103,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "expr": "avg_over_time(\n  min(ceil(\n    kube_deployment_status_replicas_available{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"} /\n    kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"}\n  ))\n[$__range:1m])",
             "refId": "A"
@@ -111,7 +111,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "expr": "avg_over_time(\n  min(ceil(\n    kube_statefulset_status_replicas_ready{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"} /\n    kube_statefulset_status_replicas{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"}\n  ))\n[$__range:1m])",
             "refId": "B"
@@ -123,7 +123,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "Timeline showing when how many of the desired replicas were healthy",
         "fieldConfig": {
@@ -208,7 +208,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "max(\n  kube_deployment_status_replicas_available{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"} /\n  kube_deployment_status_replicas{namespace=\"$namespace\",deployment=~\"$service|.*$service.*\"}\n) by (deployment)",
@@ -218,7 +218,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "max(\n  kube_statefulset_status_replicas_ready{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"} /\n  kube_statefulset_status_replicas{namespace=\"$namespace\",statefulset=~\"$service|.*$service.*\"}\n) by (statefulset)",
@@ -232,7 +232,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "Timeline showing when pod restarts occurred",
         "fieldConfig": {
@@ -309,7 +309,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "sum(rate(kube_pod_container_status_restarts_total{namespace=\"$namespace\",container=~\".*$service.*\"}[5m])) * 300 > 0",
@@ -320,7 +320,7 @@
         "type": "timeseries"
     },
     {
-        "datasource": "PBFA97CFB590B2093",
+        "datasource": "prometheus",
         "description": "Running versions (Docker image tags) over time.",
         "fieldConfig": {
         "defaults": {
@@ -409,7 +409,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "max(label_replace(kube_pod_container_info{namespace=\"$namespace\",container=\"$service\"}, \"version\", \"$1\", \"image\", \".*:(.*)\")) by (version)",
@@ -437,7 +437,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "Memory usage of the main container (without sidecars)",
         "fieldConfig": {
@@ -582,7 +582,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "max(container_memory_working_set_bytes{namespace=\"$namespace\",container=\"$service\"}) by (pod) != 0",
@@ -593,7 +593,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_requests{resource=\"memory\",namespace=\"$namespace\",container=\"$service\"})",
@@ -603,7 +603,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_limits{resource=\"memory\",namespace=\"$namespace\",container=\"$service\"})",
@@ -617,7 +617,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "CPU usage of the main container (without sidecars)",
         "fieldConfig": {
@@ -761,7 +761,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "max(rate(container_cpu_usage_seconds_total{namespace=\"$namespace\",container=\"$service\"}[$__rate_interval])) by (pod) != 0",
@@ -772,7 +772,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_requests{resource=\"cpu\",namespace=\"$namespace\",container=\"$service\"})",
@@ -782,7 +782,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "min(kube_pod_container_resource_limits{resource=\"cpu\",namespace=\"$namespace\",container=\"$service\"})",
@@ -818,7 +818,7 @@
         "dataFormat": "tsbuckets",
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "Distribution of response times as measured by ingress controller",
         "gridPos": {
@@ -841,7 +841,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "sum(increase(nginx_ingress_controller_response_duration_seconds_bucket{namespace=\"$namespace\",service=~\"$service|.*$service.*\"}[$__rate_interval])) by (le)",
@@ -852,7 +852,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "sum(increase(istio_request_duration_milliseconds_bucket{destination_service_namespace=\"$namespace\",destination_service_name=\"$service\",reporter=\"source\"}[$__rate_interval])) by (le)",
@@ -881,7 +881,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "Request count by HTTP status code as measured by ingress controller",
         "fieldConfig": {
@@ -962,7 +962,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "sum(rate(nginx_ingress_controller_requests{namespace=\"$namespace\",service=~\"$service|.*$service.*\"}[$__rate_interval])) by (method, status)",
@@ -972,7 +972,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "exemplar": false,
             "expr": "sum(rate(istio_requests_total{destination_service_namespace=\"$namespace\",destination_service_name=\"$service\",reporter=\"source\"}[$__rate_interval])) by (response_code)",
@@ -1032,7 +1032,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "description": "The time of the probe connection (like API or external/internal services over HTTP(s) protocol)",
         "fieldConfig": {
@@ -1113,7 +1113,7 @@
         {
             "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
             },
             "editorMode": "code",
             "expr": "sum(probe_http_duration_seconds{service=\"$service\"}) by (component,$service)",
@@ -1128,7 +1128,7 @@
     {
         "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
         },
         "fieldConfig": {
         "defaults": {
@@ -1193,7 +1193,7 @@
     {
         "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
         },
         "editorMode": "code",
         "exemplar": false,
@@ -1211,7 +1211,7 @@
 {
 "datasource": {
     "type": "prometheus",
-    "uid": "PBFA97CFB590B2093"
+    "uid": "prometheus"
 },
 "fieldConfig": {
     "defaults": {
@@ -1272,7 +1272,7 @@
 {
     "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "prometheus"
     },
     "editorMode": "code",
     "exemplar": false,
@@ -1302,7 +1302,7 @@
         },
         "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
         },
         "definition": "label_values(kube_pod_info{namespace=~\"argo-cd|prod|staging|grafana|prometheus\"}, namespace)",
         "description": "Kubernetes namespace to inspect",
@@ -1333,7 +1333,7 @@
         },
         "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
         },
         "definition": "label_values(kube_pod_container_info{namespace=\"$namespace\"}, container)",
         "description": "Name of service (Deployment, Container, etc.) to inspect",
