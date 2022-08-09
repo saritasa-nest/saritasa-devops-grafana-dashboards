@@ -407,7 +407,7 @@
             "uid": "prometheus"
           },
           "exemplar": false,
-          "expr": "avg by (set) (max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$service_name\",state!=\"ARBITER\"}[${__range}]))",
+          "expr": "avg by (set) (max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$service_name\",state=\"SECONDARY\"}[${__range}]))",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -637,7 +637,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg by (service_name) (max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state!=\"ARBITER\"}[$interval]) > 0) by (service_name,set) or max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state!=\"ARBITER\"}[5m]) > 0) by (service_name,set))",
+          "expr": "avg by (service_name) (max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state=\"SECONDARY\"}[$interval]) > 0) by (service_name,set) or max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state=\"SECONDARY\"}[5m]) > 0) by (service_name,set))",
           "interval": "$interval",
           "intervalFactor": 1,
           "legendFormat": "{{service_name}}",
@@ -645,7 +645,7 @@
           "step": 300
         },
         {
-          "expr": "avg by (set) (max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state!=\"ARBITER\"}[$interval]) > 0) by (service_name,set) or max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state!=\"ARBITER\"}[5m]) > 0) by (service_name,set))",
+          "expr": "avg by (set) (max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state=\"SECONDARY\"}[$interval]) > 0) by (service_name,set) or max(max_over_time(mongodb_mongod_replset_member_replication_lag{set=\"$replset\",service_name=~\"$secondary\",state=\"SECONDARY\"}[5m]) > 0) by (service_name,set))",
           "hide": true,
           "interval": "$interval",
           "legendFormat": "Avg",
