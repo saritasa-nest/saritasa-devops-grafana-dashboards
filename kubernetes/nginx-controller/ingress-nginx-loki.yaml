@@ -1756,6 +1756,64 @@
       {
         "allValue": null,
         "current": {
+          "selected": false,
+          "text": "job",
+          "value": "job"
+        },
+        "datasource": "$datasource",
+        "definition": "label_names()",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Label Name",
+        "multi": false,
+        "name": "label_name",
+        "options": [],
+        "query": "label_names()",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "ingress-nginx/ingress-nginx"
+          ],
+          "value": [
+            "ingress-nginx/ingress-nginx"
+          ]
+        },
+        "datasource": "$datasource",
+        "definition": "label_values($label_name)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Label Value",
+        "multi": true,
+        "name": "label_value",
+        "options": [],
+        "query": "label_values($label_name)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
           "selected": true,
           "text": [
             "ingress-nginx/ingress-nginx"
