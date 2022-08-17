@@ -24,6 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -129,7 +130,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "alertmanager_alerts{state=\"active\"}",
+          "expr": "count(ALERTS)",
           "hide": false,
           "interval": "",
           "legendFormat": "Active Alerts",
@@ -468,10 +469,13 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
-          "expr": "sum by (status) (count_over_time({job=\"ingress-nginx/ingress-nginx\"} | json |  __error__=\"\" [$__interval]))",
-          "instant": false,
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "expr": "(sum by (status) (count_over_time({job=\"ingress-nginx/ingress-nginx\"} | json | status=~\"4.*|5.*\" |  __error__=\"\" [$__interval])))",
           "legendFormat": "HTTP Status: {{status}}",
-          "range": true,
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -517,7 +521,7 @@
         "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "vertical",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -537,10 +541,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "exemplar": true,
-          "expr": "sort_desc(1-(kubelet_volume_stats_available_bytes/kubelet_volume_stats_capacity_bytes))",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sort_desc(kubelet_volume_stats_used_bytes/kubelet_volume_stats_capacity_bytes)",
+          "instant": true,
           "interval": "",
           "legendFormat": "{{ persistentvolumeclaim }}",
+          "range": false,
           "refId": "A"
         }
       ],
@@ -794,6 +801,8 @@
         "max": true,
         "min": true,
         "show": true,
+        "sort": "avg",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -1242,7 +1251,7 @@
       },
       "id": 26,
       "options": {
-        "alertInstanceLabelFilter": "{severity=\"critical\"}",
+        "alertInstanceLabelFilter": "{severity=~\"critical|warning\"}",
         "alertName": "",
         "dashboardAlerts": false,
         "groupBy": [],
@@ -1266,8 +1275,98 @@
           "refId": "A"
         }
       ],
-      "title": "Critical Alerts",
+      "title": "Current Alerts",
       "type": "alertlist"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 44
+      },
+      "id": 32,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "SUM(ALERTS)",
+          "refId": "A"
+        }
+      ],
+      "title": "Alerts last 3 hours",
+      "type": "timeseries"
     }
   ],
   "refresh": "30s",
@@ -1278,7 +1377,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1311,6 +1410,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
