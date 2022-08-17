@@ -90,7 +90,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "sum by(host) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"}[$__interval]))  ",
+          "expr": "sum by(host) (count_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval]))  ",
           "legendFormat": "",
           "refId": "A"
         }
@@ -154,7 +154,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "sum by (status) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [$__interval]))",
+          "expr": "sum by (status) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [$__interval]))",
           "instant": false,
           "legendFormat": "HTTP Status: {{status}}",
           "range": true,
@@ -217,7 +217,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "bytes_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"}[$__interval])",
+          "expr": "bytes_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval])",
           "instant": true,
           "legendFormat": "$label_value",
           "range": false,
@@ -278,7 +278,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "sum by (host) (sum_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | unwrap body_bytes_sent |  __error__=\"\" [$__interval]))",
+          "expr": "sum by (host) (sum_over_time({job=~\"$job\", instance=~\"$instance\"} | json | unwrap body_bytes_sent |  __error__=\"\" [$__interval]))",
           "instant": true,
           "legendFormat": "Bytes sent",
           "range": false,
@@ -345,7 +345,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "sum(count_over_time(({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} |= \"Googlebot\")[$__interval])) / (sum(count_over_time(({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} != \"Googlebot\")[$__interval])) / 100)",
+          "expr": "sum(count_over_time(({job=~\"$job\", instance=~\"$instance\"} |= \"Googlebot\")[$__interval])) / (sum(count_over_time(({job=~\"$job\", instance=~\"$instance\"} != \"Googlebot\")[$__interval])) / 100)",
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -404,7 +404,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "count(sum by (remote_addr) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [$__interval])))",
+          "expr": "count(sum by (remote_addr) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [$__interval])))",
           "instant": true,
           "legendFormat": "",
           "range": false,
@@ -467,7 +467,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"}[$__interval])",
+          "expr": "count_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval])",
           "instant": true,
           "range": false,
           "refId": "A"
@@ -537,7 +537,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "sum(count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | status >= 500 |__error__=\"\"[$__interval])) / (sum(count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | __error__=\"\"[$__interval]))/ 100)",
+          "expr": "sum(count_over_time({job=~\"$job\", instance=~\"$instance\"} | json | status >= 500 |__error__=\"\"[$__interval])) / (sum(count_over_time({job=~\"$job\", instance=~\"$instance\"} | json | __error__=\"\"[$__interval]))/ 100)",
           "instant": false,
           "legendFormat": "",
           "range": true,
@@ -590,7 +590,7 @@
       },
       "targets": [
         {
-          "expr": "sum by (geoip_country_code) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | geoip_country_code != \"\" | __error__=\"\" [$__interval]))",
+          "expr": "sum by (geoip_country_code) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json | geoip_country_code != \"\" | __error__=\"\" [$__interval]))",
           "instant": false,
           "legendFormat": "{{geoip_country_code}}",
           "range": true,
@@ -701,7 +701,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "topk(10, sum by (geoip_country_code) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | geoip_country_code != \"\" and  __error__=\"\" [$__interval])))",
+          "expr": "topk(10, sum by (geoip_country_code) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json | geoip_country_code != \"\" and  __error__=\"\" [$__interval])))",
           "instant": true,
           "legendFormat": "{{remote_addr}}",
           "maxLines": null,
@@ -761,7 +761,7 @@
       },
       "targets": [
         {
-          "expr": "{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|tekton-pipelines\" | line_format \"➡️ {{.upstream_namespace}} {{.request_method}} {{.request_uri}} with HTTP status: {{.status}}\"",
+          "expr": "{job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|tekton-pipelines\" | line_format \"➡️ {{.upstream_namespace}} {{.request_method}} {{.request_uri}} with HTTP status: {{.status}}\"",
           "legendFormat": "",
           "refId": "A"
         }
@@ -909,12 +909,12 @@
       "pluginVersion": "8.0.0-beta3",
       "targets": [
         {
-          "expr": "quantile_over_time(0.95,{$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" | unwrap request_time |  __error__=\"\"  [$__interval]) by (host)",
+          "expr": "quantile_over_time(0.95,{job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" | unwrap request_time |  __error__=\"\"  [$__interval]) by (host)",
           "legendFormat": "95th percentile",
           "refId": "C"
         },
         {
-          "expr": "max by (host) (max_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" | unwrap request_time |  __error__=\"\"  [$__interval]))",
+          "expr": "max by (host) (max_over_time({job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" | unwrap request_time |  __error__=\"\"  [$__interval]))",
           "legendFormat": "max latency",
           "refId": "D"
         }
@@ -1108,7 +1108,7 @@
       "pluginVersion": "8.0.0-beta3",
       "targets": [
         {
-          "expr": "sum by (status) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [$__interval]))",
+          "expr": "sum by (status) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [$__interval]))",
           "legendFormat": "HTTP Status {{status}}",
           "refId": "A"
         }
@@ -1243,7 +1243,7 @@
       "pluginVersion": "8.0.0-beta3",
       "targets": [
         {
-          "expr": "sum by (host) (sum_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | status=200 | unwrap body_bytes_sent |  __error__=\"\" [$__interval]))",
+          "expr": "sum by (host) (sum_over_time({job=~\"$job\", instance=~\"$instance\"} | json | status=200 | unwrap body_bytes_sent |  __error__=\"\" [$__interval]))",
           "legendFormat": "Bytes sent",
           "refId": "A"
         }
@@ -1350,7 +1350,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "topk(10, sum by (http_referer) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" |  http_referer != \"\" and http_referer !~ \".*?$host.*?\" and http_referer !~ \".*?\\\\*\\\\*\\\\*.*?\" | __error__=\"\" [15m])))",
+          "expr": "topk(10, sum by (http_referer) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" |  http_referer != \"\" and http_referer !~ \".*?$host.*?\" and http_referer !~ \".*?\\\\*\\\\*\\\\*.*?\" | __error__=\"\" [15m])))",
           "instant": true,
           "legendFormat": "{{http_referer}}",
           "range": false,
@@ -1453,7 +1453,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "topk(10, sum by (http_user_agent) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [15m])))",
+          "expr": "topk(10, sum by (http_user_agent) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [15m])))",
           "instant": true,
           "legendFormat": "{{http_user_agent}}",
           "range": false,
@@ -1583,7 +1583,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "topk(10, sum by (remote_addr, geoip_country_code) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [15m])))",
+          "expr": "topk(10, sum by (remote_addr, geoip_country_code) (count_over_time({job=~\"$job\", instance=~\"$instance\"} | json |  __error__=\"\" [15m])))",
           "instant": true,
           "legendFormat": "{{remote_addr}}",
           "range": false,
@@ -1693,7 +1693,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "topk(10, sum by (request_uri) (count_over_time({$label_name=~\"$label_value\", job=~\"$job\", instance=~\"$instance\"} !~ `\\.ico|\\.svg|\\.css|\\.png|\\.txt|\\.js|\\.xml` | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" | status = 200 and request_uri != \"/\" | __error__=\"\" [15m])))",
+          "expr": "topk(10, sum by (request_uri) (count_over_time({job=~\"$job\", instance=~\"$instance\"} !~ `\\.ico|\\.svg|\\.css|\\.png|\\.txt|\\.js|\\.xml` | json | upstream_namespace!~\"grafana|argo-cd|tekton-pipelines\" | status = 200 and request_uri != \"/\" | __error__=\"\" [15m])))",
           "instant": true,
           "legendFormat": "{{request_uri}}",
           "range": false,
@@ -1752,64 +1752,6 @@
         "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "job",
-          "value": "job"
-        },
-        "datasource": "$datasource",
-        "definition": "label_names()",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Label Name",
-        "multi": false,
-        "name": "label_name",
-        "options": [],
-        "query": "label_names()",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": [
-            "ingress-nginx/ingress-nginx"
-          ],
-          "value": [
-            "ingress-nginx/ingress-nginx"
-          ]
-        },
-        "datasource": "$datasource",
-        "definition": "label_values($label_name)",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "Label Value",
-        "multi": true,
-        "name": "label_value",
-        "options": [],
-        "query": "label_values($label_name)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       },
       {
         "allValue": null,
