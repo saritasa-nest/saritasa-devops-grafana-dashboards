@@ -1291,7 +1291,9 @@
     "refresh": "10s",
     "schemaVersion": 36,
     "style": "dark",
-    "tags": [],
+    "tags": [
+        "app"
+      ],
     "templating": {
     "list": [
         {
