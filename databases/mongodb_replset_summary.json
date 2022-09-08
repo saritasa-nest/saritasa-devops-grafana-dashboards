@@ -4329,7 +4329,7 @@
                 },
                 "definition": "label_values(mongodb_mongod_replset_my_state{instance=~\"$instance\"}, node)",
                 "hide": 2,
-                "includeAll": true,
+                "includeAll": false,
                 "label": "Node Name",
                 "multi": false,
                 "multiFormat": "glob",

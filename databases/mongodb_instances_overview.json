@@ -3179,7 +3179,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "min(rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]))\n)",
+                    "expr": "min(rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -3272,7 +3272,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "max(rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]))\n)",
+                    "expr": "max(rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -3357,7 +3357,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "min(rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
+                    "expr": "min(rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(cl_id,rs_nm,rs_state,state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(cl_id,rs_nm,rs_state,state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -3441,7 +3441,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "max(rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
+                    "expr": "max(rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(cl_id,rs_nm,rs_state,state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(cl_id,rs_nm,rs_state,state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -3564,7 +3564,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "topk(5,avg by (instance) ((rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]))\n)))",
+                    "expr": "topk(5,avg by (instance) ((rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]))\n)))",
                     "format": "time_series",
                     "hide": false,
                     "interval": "$interval",
@@ -3578,7 +3578,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "avg(rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]))\n)",
+                    "expr": "avg(rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]))\n)",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -3736,7 +3736,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])))",
+                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) \nrate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])\nor\n(irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) \nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -3839,7 +3839,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "topk(5,avg by (instance) ((rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))))",
+                    "expr": "topk(5,avg by (instance) ((rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(cl_id,rs_nm,rs_state,state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(cl_id,rs_nm,rs_state,state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))))",
                     "format": "time_series",
                     "hide": false,
                     "interval": "$interval",
@@ -3853,7 +3853,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "avg(rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
+                    "expr": "avg(rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(cl_id,rs_nm,rs_state,state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(cl_id,rs_nm,rs_state,state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -4011,7 +4011,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
+                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval])/ ignoring(cl_id,rs_nm,rs_state,state)\nrate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval])\nor\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])/ ignoring(cl_id,rs_nm,rs_state,state)\nirate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,

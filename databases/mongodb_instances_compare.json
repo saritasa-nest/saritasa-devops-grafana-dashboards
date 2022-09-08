@@ -1352,7 +1352,7 @@
                     "datasourceErrors": {},
                     "editorMode": "code",
                     "errors": {},
-                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(state) rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval]) or (irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(state) irate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])))",
+                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval]) or (irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) irate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m])))",
                     "format": "time_series",
                     "interval": "$interval",
                     "intervalFactor": 1,
@@ -1368,7 +1368,7 @@
                         "uid": "prometheus"
                     },
                     "editorMode": "code",
-                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval]) / ignoring(state)rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval]) or\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]) / ignoring(state)irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
+                    "expr": "avg by (instance) (rate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[$interval]) / ignoring(cl_id,rs_nm,rs_state,state) rate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[$interval]) or\nirate(mongodb_mongod_metrics_document_total{instance=~\"$instance\", state=\"returned\"}[5m]) / ignoring(cl_id,rs_nm,rs_state,state) irate(mongodb_mongod_metrics_query_executor_total{instance=~\"$instance\", state=\"scanned_objects\"}[5m]))",
                     "interval": "$interval",
                     "legendFormat": "Document {{instance}}",
                     "range": true,

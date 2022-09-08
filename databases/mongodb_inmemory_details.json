@@ -1316,7 +1316,7 @@
                         "type": "prometheus",
                         "uid": "prometheus"
                     },
-                    "expr": "avg by (instance) (rate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=~\"$instance\",type=\"modified\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=~\"$instance\",type=\"modified\"}[5m]))",
+                    "expr": "avg by (instance) (rate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=~\"$instance\"}[$interval]) or irate(mongodb_mongod_wiredtiger_cache_evicted_total{instance=~\"$instance\"}[5m]))",
                     "interval": "$interval",
                     "intervalFactor": 1,
                     "legendFormat": "Evicted",
