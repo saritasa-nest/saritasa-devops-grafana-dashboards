@@ -627,6 +627,83 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 14
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.0.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sort(\n\t100-((node_filesystem_avail_bytes{mountpoint=\"/\"} * 100) / node_filesystem_size_bytes) > 30\n) * ON (node) group_left(\n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle\n\t) max by (\n\t\tnode, \n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle\n\t) (kube_node_labels)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{ node }} - {{ label_node_kubernetes_io_lifecycle }} - {{label_tech_stack}} {{ label_workload }}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Node Disk Usage",
+      "type": "stat"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -641,7 +718,7 @@
         "h": 11,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 13
       },
       "hiddenSeries": false,
       "id": 12,
@@ -756,7 +833,7 @@
         "h": 11,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 13
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -862,7 +939,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 19
+        "y": 24
       },
       "hiddenSeries": false,
       "id": 14,
@@ -981,7 +1058,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 19
+        "y": 24
       },
       "hiddenSeries": false,
       "id": 24,
@@ -1096,7 +1173,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 29
+        "y": 34
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -1217,7 +1294,7 @@
         "h": 10,
         "w": 12,
         "x": 12,
-        "y": 29
+        "y": 34
       },
       "hiddenSeries": false,
       "id": 22,
@@ -1319,7 +1396,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 44
       },
       "id": 26,
       "options": {
@@ -1392,8 +1469,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1408,7 +1484,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 54
       },
       "id": 32,
       "options": {
@@ -1486,8 +1562,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1503,7 +1578,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 62
       },
       "id": 37,
       "options": {
@@ -1546,7 +1621,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -1579,6 +1654,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 8,
+  "version": 9,
   "weekStart": ""
 }
