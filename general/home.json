@@ -1323,6 +1323,7 @@
       },
       "id": 26,
       "options": {
+        "alertInstanceLabelFilter": "",
         "alertName": "",
         "dashboardAlerts": false,
         "groupBy": [],
@@ -1391,8 +1392,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1485,8 +1485,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1545,7 +1544,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -1578,6 +1577,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
