@@ -1390,44 +1390,6 @@
     },
     {
       "datasource": {
-        "uid": "Prometheus AlertManager"
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 24,
-        "x": 0,
-        "y": 44
-      },
-      "id": 26,
-      "options": {
-        "alertInstanceLabelFilter": "",
-        "alertName": "",
-        "dashboardAlerts": false,
-        "groupBy": [],
-        "groupMode": "default",
-        "maxItems": 20,
-        "sortOrder": 3,
-        "stateFilter": {
-          "error": true,
-          "firing": true,
-          "noData": false,
-          "normal": false,
-          "pending": false
-        }
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "active": true,
-          "filters": "severity=critical",
-          "refId": "A"
-        }
-      ],
-      "title": "Current Alerts",
-      "type": "alertlist"
-    },
-    {
-      "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
@@ -1485,7 +1447,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 44
       },
       "id": 32,
       "options": {
@@ -1580,7 +1542,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 52
       },
       "id": 37,
       "options": {
@@ -1623,7 +1585,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1656,6 +1618,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 9,
+  "version": 10,
   "weekStart": ""
 }
