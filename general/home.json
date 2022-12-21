@@ -559,12 +559,14 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
+      "description": "Display only PVCs that are used above 10%",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "OK 🥰",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -604,7 +606,7 @@
         "text": {
           "titleSize": 14
         },
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.0.1",
       "targets": [
@@ -615,7 +617,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sort_desc(kubelet_volume_stats_used_bytes/kubelet_volume_stats_capacity_bytes)",
+          "expr": "sort_desc(kubelet_volume_stats_used_bytes/kubelet_volume_stats_capacity_bytes)>0.1",
           "instant": true,
           "interval": "",
           "legendFormat": "{{ persistentvolumeclaim }}",
@@ -623,7 +625,7 @@
           "refId": "A"
         }
       ],
-      "title": "PVC Usage",
+      "title": "PVC Usage > 10%",
       "type": "stat"
     },
     {
@@ -637,6 +639,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "OK 🥰",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -680,7 +683,7 @@
         "text": {
           "titleSize": 14
         },
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
       "pluginVersion": "9.0.1",
       "targets": [
@@ -700,7 +703,7 @@
           "refId": "A"
         }
       ],
-      "title": "Node Disk Usage",
+      "title": "Node Disk Usage > 30%",
       "type": "stat"
     },
     {
@@ -1618,6 +1621,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
