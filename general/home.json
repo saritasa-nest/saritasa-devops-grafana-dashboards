@@ -114,7 +114,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -130,12 +130,13 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "exemplar": true,
+          "exemplar": false,
           "expr": "count(ALERTS{alertstate=\"firing\"})",
           "hide": false,
+          "instant": true,
           "interval": "",
           "legendFormat": "Active Alerts",
-          "range": true,
+          "range": false,
           "refId": "A"
         }
       ],
@@ -214,12 +215,14 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
+      "description": "Pods in pending state over 5m",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -250,7 +253,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "last"
           ],
           "fields": "",
           "values": false
@@ -265,16 +268,19 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "exemplar": true,
-          "expr": "sum(kube_pod_status_phase{namespace=~\".*\", phase=\"Pending\"})",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum_over_time(sum by (namespace, pod) (kube_pod_status_phase{namespace!=\"insights-agent\", phase=~\"Pending|Unknown\"})[1m:5m]) > 0",
           "format": "table",
+          "instant": false,
           "interval": "",
           "legendFormat": "",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Pods Pending",
+      "title": "Pods Pending 5m",
       "type": "stat"
     },
     {
@@ -1477,6 +1483,8 @@
       },
       "id": 32,
       "options": {
+        "alertInstanceLabelFilter": "",
+        "alertName": "",
         "dashboardAlerts": false,
         "groupBy": [],
         "groupMode": "default",
@@ -1701,7 +1709,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "30s",
+  "refresh": "5s",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
