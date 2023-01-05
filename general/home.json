@@ -24,6 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 1,
   "links": [
     {
       "asDropdown": true,
@@ -114,7 +115,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -132,11 +133,12 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "count(ALERTS{alertstate=\"firing\"})",
+          "format": "time_series",
           "hide": false,
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "Active Alerts",
-          "range": false,
+          "range": true,
           "refId": "A"
         }
       ],
@@ -270,13 +272,13 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum_over_time(sum by (namespace, pod) (kube_pod_status_phase{namespace!=\"insights-agent\", phase=~\"Pending|Unknown\"})[1m:5m]) > 0",
+          "expr": "min_over_time(kube_pod_status_phase{namespace!=\"insights-agent\", phase=~\"Pending|Unknown\"}[5m:5m])>0",
           "format": "table",
-          "instant": false,
+          "instant": true,
           "interval": "",
           "legendFormat": "",
           "queryType": "randomWalk",
-          "range": true,
+          "range": false,
           "refId": "A"
         }
       ],
@@ -340,12 +342,14 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "count(rate(kube_pod_container_status_restarts_total{job=\"kubernetes-service-endpoints\"}[5m]) * 60 * 5 > 0)",
           "format": "table",
           "interval": "",
           "legendFormat": "",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1750,6 +1754,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 11,
+  "version": 15,
   "weekStart": ""
 }
