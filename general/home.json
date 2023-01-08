@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [
     {
       "asDropdown": true,
@@ -533,6 +532,77 @@
         "x": 12,
         "y": 0
       },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(min(kube_pod_info{node!=\"\"}) by (cluster, node))",
+          "format": "table",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Nodes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 14,
+        "y": 0
+      },
       "id": 5,
       "options": {
         "colorMode": "value",
@@ -599,8 +669,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 10,
-        "x": 14,
+        "w": 8,
+        "x": 16,
         "y": 0
       },
       "id": 20,
@@ -776,7 +846,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sort(\n\t100-((node_filesystem_avail_bytes{mountpoint=\"/\"} * 100) / node_filesystem_size_bytes) > 30\n) * ON (node) group_left(\n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle\n\t) max by (\n\t\tnode, \n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle\n\t) (kube_node_labels)\n",
+          "expr": "sort(\n\t100-((node_filesystem_avail_bytes{mountpoint=\"/\"} * 100) / node_filesystem_size_bytes) > 30\n) * ON (node) group_left(\n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle,\n\t\tlabel_ci\n\t) max by (\n\t\tnode, \n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle,\n\t\tlabel_ci\n\t) (kube_node_labels)\n",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1754,6 +1824,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 15,
+  "version": 16,
   "weekStart": ""
 }
