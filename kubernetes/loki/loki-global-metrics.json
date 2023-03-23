@@ -2695,7 +2695,8 @@
     "schemaVersion": 37,
     "style": "dark",
     "tags": [
-      "jenkins-x",
+      "kubernetes",
+      "logs",
       "loki"
     ],
     "templating": {
