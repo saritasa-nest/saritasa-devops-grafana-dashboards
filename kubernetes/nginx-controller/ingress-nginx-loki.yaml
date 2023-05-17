@@ -217,7 +217,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "bytes_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval])",
+          "expr": "sum by (app) (bytes_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval]))",
           "instant": true,
           "legendFormat": "$label_value",
           "range": false,
@@ -467,7 +467,7 @@
       "pluginVersion": "8.1.2",
       "targets": [
         {
-          "expr": "count_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval])",
+          "expr": "sum by (app) (count_over_time({job=~\"$job\", instance=~\"$instance\"}[$__interval]))",
           "instant": true,
           "range": false,
           "refId": "A"
