@@ -1367,7 +1367,7 @@
             "type": "prometheus",
             "uid": "prometheus"
         },
-        "definition": "label_values(kube_pod_info{namespace=~\"prod|staging\"}, namespace)",
+        "definition": "label_values(kube_pod_info{namespace=~\".*\"}, namespace)",
         "description": "Kubernetes namespace to inspect",
         "hide": 0,
         "includeAll": false,
@@ -1376,7 +1376,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-            "query": "label_values(kube_pod_info{namespace=~\"prod|staging\"}, namespace)",
+            "query": "label_values(kube_pod_info{namespace=~\".*\"}, namespace)",
             "refId": "StandardVariableQuery"
         },
         "refresh": 1,
