@@ -1,5 +1,12 @@
 # Changelog
 
+## 2023-12-18
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/5)
+- Fixed ArgoCD dashboard configuration
+
 ## 2023-11-23
 
 [prod]
