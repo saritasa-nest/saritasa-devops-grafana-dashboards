@@ -4471,7 +4471,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -4502,6 +4502,6 @@
   "timezone": "",
   "title": "ArgoCD",
   "uid": "DRRqkYOnz",
-  "version": 11,
+  "version": 12,
   "weekStart": ""
 }
