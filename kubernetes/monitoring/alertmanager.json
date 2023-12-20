@@ -758,35 +758,6 @@
       "datasource": {
         "uid": "Prometheus AlertManager"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 12,
         "w": 24,
@@ -795,16 +766,21 @@
       },
       "id": 179,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "alertInstanceLabelFilter": "{severity=\"critical\"}",
+        "alertName": "",
+        "dashboardAlerts": false,
+        "groupBy": [],
+        "groupMode": "default",
+        "maxItems": 20,
+        "sortOrder": 1,
+        "stateFilter": {
+          "error": true,
+          "firing": true,
+          "noData": false,
+          "normal": false,
+          "pending": false
         },
-        "showHeader": true
+        "viewMode": "list"
       },
       "pluginVersion": "10.2.2",
       "targets": [
@@ -818,7 +794,7 @@
         }
       ],
       "title": "Critical Alerts",
-      "type": "table"
+      "type": "alertlist"
     },
     {
       "aliasColors": {},
@@ -1940,8 +1916,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2259,6 +2234,6 @@
   "timezone": "",
   "title": "Alertmanager",
   "uid": "nDCthGDnk",
-  "version": 7,
+  "version": 9,
   "weekStart": ""
 }
