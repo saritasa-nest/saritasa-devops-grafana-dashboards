@@ -1,5 +1,12 @@
 # Changelog
 
+## 2023-12-15
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/4)
+- Fixed alertmanager dashboard configuration
+
 ## 2023-11-23
 
 [prod]
