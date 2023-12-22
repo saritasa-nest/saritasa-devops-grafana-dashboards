@@ -26,7 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 315,
   "graphTooltip": 0,
-  "iteration": 1658922074780,
+  "id": 12,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -71,7 +71,6 @@
       "height": "200px",
       "hiddenSeries": false,
       "id": 32,
-      "isNew": true,
       "legend": {
         "alignAsTable": false,
         "avg": true,
@@ -94,7 +93,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -104,20 +103,32 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (rate (container_network_receive_bytes_total{kubernetes_io_hostname=~\"^$Node$\"}[1m]))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (rate (container_network_receive_bytes_total{node=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Received",
           "metric": "network",
+          "range": true,
           "refId": "A",
           "step": 10
         },
         {
-          "expr": "- sum (rate (container_network_transmit_bytes_total{kubernetes_io_hostname=~\"^$Node$\"}[1m]))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "- sum (rate (container_network_transmit_bytes_total{node=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Sent",
           "metric": "network",
+          "range": true,
           "refId": "B",
           "step": 10
         }
@@ -224,6 +235,8 @@
       "links": [],
       "maxDataPoints": 100,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -235,14 +248,20 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) / sum (machine_memory_bytes{kubernetes_io_hostname=~\"^$Node$\"}) * 100",
-          "interval": "10s",
-          "intervalFactor": 1,
-          "refId": "A",
-          "step": 10
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "(1 - (\n          (\n            sum (node_memory_MemAvailable_bytes{job=\"node-exporter\", node=~\"^$Node$\"})\n            or\n            sum (\n            (\n              node_memory_Buffers_bytes{job=\"node-exporter\", node=~\"^$Node$\"}\n              +\n              node_memory_Cached_bytes{job=\"node-exporter\", node=~\"^$Node$\"}\n              +\n              node_memory_MemFree_bytes{job=\"node-exporter\", node=~\"^$Node$\"}\n              +\n              node_memory_Slab_bytes{job=\"node-exporter\", node=~\"^$Node$\"}\n            ))\n          )\n        /\n          sum (node_memory_MemTotal_bytes{job=\"node-exporter\", node=~\"^$Node$\"})\n        ))*100\n",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
         }
       ],
       "title": "Cluster memory usage",
@@ -303,6 +322,8 @@
       "links": [],
       "maxDataPoints": 100,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -314,12 +335,18 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) / sum (machine_cpu_cores{kubernetes_io_hostname=~\"^$Node$\"}) * 100",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\",node=~\"^$Node$\"}[1m])) / sum (machine_cpu_cores{node=~\"^$Node$\"}) * 100 ",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -382,6 +409,8 @@
       "links": [],
       "maxDataPoints": 100,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -393,18 +422,20 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum (container_fs_usage_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) / sum (container_fs_limit_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) * 100",
+          "editorMode": "code",
+          "expr": "100 - (sum (node_filesystem_avail_bytes{mountpoint!=\"\", node=~\"^$Node$\"}) / sum (node_filesystem_size_bytes{mountpoint!=\"\", node=~\"^$Node$\"}) * 100)",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "",
           "metric": "",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -472,14 +503,21 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (container_memory_working_set_bytes{container!=\"\", node=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -547,14 +585,21 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
-          "expr": "sum (machine_memory_bytes{kubernetes_io_hostname=~\"^$Node$\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (machine_memory_bytes{node=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -622,14 +667,21 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m]))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\",node=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -697,14 +749,21 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
-          "expr": "sum (machine_cpu_cores{kubernetes_io_hostname=~\"^$Node$\"})",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (machine_cpu_cores{node=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -772,18 +831,21 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum (container_fs_usage_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"})",
+          "editorMode": "code",
+          "expr": "sum (node_filesystem_size_bytes{mountpoint!=\"\", node=~\"^$Node$\"}) - sum (node_filesystem_avail_bytes{mountpoint!=\"\", node=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -851,18 +913,21 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum (container_fs_limit_bytes{id=\"/\",kubernetes_io_hostname=~\"^$Node$\"})",
+          "editorMode": "code",
+          "expr": "sum (node_filesystem_size_bytes{mountpoint!=\"\", node=~\"^$Node$\"})",
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -911,7 +976,6 @@
       "height": "",
       "hiddenSeries": false,
       "id": 17,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -933,7 +997,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -943,11 +1007,17 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{image!=\"\",node=~\"^$Node$\"}[1m])) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "{{ pod_name }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }}",
           "metric": "container_cpu",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -1025,7 +1095,6 @@
       "height": "",
       "hiddenSeries": false,
       "id": 23,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1047,7 +1116,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1061,12 +1130,14 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum (rate (container_cpu_usage_seconds_total{name!=\"\",kubernetes_io_hostname=~\"^$Node$\", namespace=\"kube-system\"}[1m])) by (name)",
+          "editorMode": "code",
+          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{name!=\"\",node=~\"^$Node$\", namespace=\"kube-system\"}[1m])) by (name, namespace, node, pod))",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "{{ systemd_service_name }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} ",
           "metric": "container_cpu",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -1144,7 +1215,6 @@
       "height": "",
       "hiddenSeries": false,
       "id": 24,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1168,7 +1238,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1178,32 +1248,19 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name=~\"^k8s_.*\",container_name!=\"POD\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (container_name, pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{image!=\"\", container!=\"\", node=~\"^$Node$\"}[1m])) by (container, node, pod, namespace))",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "pod: {{ pod_name }} | {{ container_name }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }}",
           "metric": "container_cpu",
+          "range": true,
           "refId": "A",
-          "step": 10
-        },
-        {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, name, image)",
-          "hide": false,
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "docker: {{ kubernetes_io_hostname }} | {{ image }} ({{ name }})",
-          "metric": "container_cpu",
-          "refId": "B",
-          "step": 10
-        },
-        {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
-          "metric": "container_cpu",
-          "refId": "C",
           "step": 10
         }
       ],
@@ -1279,7 +1336,6 @@
       },
       "hiddenSeries": false,
       "id": 20,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1301,7 +1357,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1311,12 +1367,18 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (id)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc(sum (rate (container_cpu_usage_seconds_total{id!=\"\", node=~\"^$Node$\"}[1m])) by (id, node, pod, namespace))",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "{{ id }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }}     ",
           "metric": "container_cpu",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -1393,7 +1455,6 @@
       },
       "hiddenSeries": false,
       "id": 25,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1402,7 +1463,6 @@
         "min": false,
         "rightSide": true,
         "show": true,
-        "sideWidth": 200,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1416,7 +1476,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1426,11 +1486,17 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}) by (pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{image!=\"\", node=~\"^$Node$\"}) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "{{ pod_name }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} ",
           "metric": "container_memory_usage:sort_desc",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -1506,7 +1572,6 @@
       },
       "hiddenSeries": false,
       "id": 26,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1515,7 +1580,6 @@
         "min": false,
         "rightSide": true,
         "show": true,
-        "sideWidth": 200,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1529,7 +1593,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1543,11 +1607,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum (container_memory_working_set_bytes{name!=\"\",kubernetes_io_hostname=~\"^$Node$\", namespace=\"kube-system\"}) by (name)",
+          "editorMode": "code",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{name!=\"\",node=~\"^$Node$\", namespace=\"kube-system\"}) by (node, pod, namespace, name))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "{{ systemd_service_name }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} ",
           "metric": "container_memory_usage:sort_desc",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -1623,7 +1689,6 @@
       },
       "hiddenSeries": false,
       "id": 27,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1632,7 +1697,6 @@
         "min": false,
         "rightSide": true,
         "show": true,
-        "sideWidth": 200,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1646,7 +1710,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1656,30 +1720,18 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{image!=\"\",name=~\"^k8s_.*\",container_name!=\"POD\",kubernetes_io_hostname=~\"^$Node$\"}) by (container_name, pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{image!=\"\", container!=\"\", node=~\"^$Node$\"}) by (container, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "pod: {{ pod_name }} | {{ container_name }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} | {{ container }}",
           "metric": "container_memory_usage:sort_desc",
+          "range": true,
           "refId": "A",
-          "step": 10
-        },
-        {
-          "expr": "sum (container_memory_working_set_bytes{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}) by (kubernetes_io_hostname, name, image)",
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "docker: {{ kubernetes_io_hostname }} | {{ image }} ({{ name }})",
-          "metric": "container_memory_usage:sort_desc",
-          "refId": "B",
-          "step": 10
-        },
-        {
-          "expr": "sum (container_memory_working_set_bytes{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}) by (kubernetes_io_hostname, rkt_container_name)",
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
-          "metric": "container_memory_usage:sort_desc",
-          "refId": "C",
           "step": 10
         }
       ],
@@ -1754,7 +1806,6 @@
       },
       "hiddenSeries": false,
       "id": 28,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1777,7 +1828,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1787,11 +1838,17 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}) by (id)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{id!=\"\",node=~\"^$Node$\"}) by (id, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "{{ id }}",
+          "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} ",
           "metric": "container_memory_usage:sort_desc",
+          "range": true,
           "refId": "A",
           "step": 10
         }
@@ -1867,7 +1924,6 @@
       },
       "hiddenSeries": false,
       "id": 16,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1876,7 +1932,6 @@
         "min": false,
         "rightSide": true,
         "show": true,
-        "sideWidth": 200,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1890,7 +1945,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1900,20 +1955,32 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (rate (container_network_receive_bytes_total{image!=\"\", node=~\"^$Node$\"}[1m])) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "-> {{ pod_name }}",
+          "legendFormat": "-> pod: {{ namespace }} / {{ pod }}",
           "metric": "network",
+          "range": true,
           "refId": "A",
           "step": 10
         },
         {
-          "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (- sum (rate (container_network_transmit_bytes_total{image!=\"\", node=~\"^$Node$\"}[1m])) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "<- {{ pod_name }}",
+          "legendFormat": "<-  pod: {{ namespace }} / {{ pod }}",
           "metric": "network",
+          "range": true,
           "refId": "B",
           "step": 10
         }
@@ -1989,7 +2056,6 @@
       },
       "hiddenSeries": false,
       "id": 30,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -1998,7 +2064,6 @@
         "min": false,
         "rightSide": true,
         "show": true,
-        "sideWidth": 200,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -2012,7 +2077,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2022,63 +2087,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (container_name, pod_name)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum (rate (container_network_transmit_bytes_total{image!=\"\", node=~\"^$Node$\"}[1m])) by (namespace, pod)",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "-> pod: {{ pod_name }} | {{ container_name }}",
+          "legendFormat": "<- pod: {{ namespace }} | {{ pod }}",
           "metric": "network",
-          "refId": "B",
-          "step": 10
-        },
-        {
-          "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name=~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (container_name, pod_name)",
-          "hide": false,
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "<- pod: {{ pod_name }} | {{ container_name }}",
-          "metric": "network",
+          "range": true,
           "refId": "D",
-          "step": 10
-        },
-        {
-          "expr": "sum (rate (container_network_receive_bytes_total{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, name, image)",
-          "hide": false,
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "-> docker: {{ kubernetes_io_hostname }} | {{ image }} ({{ name }})",
-          "metric": "network",
-          "refId": "A",
-          "step": 10
-        },
-        {
-          "expr": "- sum (rate (container_network_transmit_bytes_total{image!=\"\",name!~\"^k8s_.*\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, name, image)",
-          "hide": false,
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "<- docker: {{ kubernetes_io_hostname }} | {{ image }} ({{ name }})",
-          "metric": "network",
-          "refId": "C",
-          "step": 10
-        },
-        {
-          "expr": "sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
-          "hide": false,
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "-> rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
-          "metric": "network",
-          "refId": "E",
-          "step": 10
-        },
-        {
-          "expr": "- sum (rate (container_network_transmit_bytes_total{rkt_container_name!=\"\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (kubernetes_io_hostname, rkt_container_name)",
-          "hide": false,
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "<- rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
-          "metric": "network",
-          "refId": "F",
           "step": 10
         }
       ],
@@ -2153,7 +2174,6 @@
       },
       "hiddenSeries": false,
       "id": 29,
-      "isNew": true,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -2176,7 +2196,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2186,20 +2206,32 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (rate (container_network_receive_bytes_total{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (id)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (sum (rate (container_network_receive_bytes_total{id!=\"\", node=~\"^$Node$\"}[1m])) by (id, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "-> {{ id }}",
+          "legendFormat": "-> pod: {{ namespace }} / {{ pod }}",
           "metric": "network",
+          "range": true,
           "refId": "A",
           "step": 10
         },
         {
-          "expr": "- sum (rate (container_network_transmit_bytes_total{id!=\"/\",kubernetes_io_hostname=~\"^$Node$\"}[1m])) by (id)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort_desc (- sum (rate (container_network_transmit_bytes_total{id!=\"\", node=~\"^$Node$\"}[1m])) by (id, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "<- {{ id }}",
+          "legendFormat": "<- pod: {{ namespace }} / {{ pod }}",
           "metric": "network",
+          "range": true,
           "refId": "B",
           "step": 10
         }
@@ -2237,8 +2269,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 36,
-  "style": "dark",
+  "schemaVersion": 38,
   "tags": [
     "kubernetes"
   ],
@@ -2247,23 +2278,24 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": "ip-10-110-4-28.ec2.internal",
-          "value": "ip-10-110-4-28.ec2.internal"
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "",
+        "definition": "label_values(node)",
         "hide": 0,
         "includeAll": true,
         "multi": false,
         "name": "Node",
         "options": [],
         "query": {
-          "query": "label_values(kubernetes_io_hostname)",
-          "refId": "Prometheus-Node-Variable-Query"
+          "qryType": 1,
+          "query": "label_values(node)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -2305,6 +2337,6 @@
   "timezone": "browser",
   "title": "Kubernetes - Cluster Monitoring",
   "uid": "Yuvhycvnk",
-  "version": 1,
+  "version": 34,
   "weekStart": ""
 }
