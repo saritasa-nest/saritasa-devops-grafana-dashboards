@@ -1,5 +1,12 @@
 # Changelog
 
+## 2023-12-22
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/6)
+- Fixed Kubernetes - cluster overview dashboard configuration
+
 ## 2023-12-18
 
 [prod]
