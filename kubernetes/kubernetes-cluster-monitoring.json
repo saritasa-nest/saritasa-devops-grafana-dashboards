@@ -108,7 +108,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum (rate (container_network_receive_bytes_total{node=~\"^$Node$\"}[1m]))",
+          "expr": "sum (rate (container_network_receive_bytes_total{node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Received",
@@ -123,7 +123,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "- sum (rate (container_network_transmit_bytes_total{node=~\"^$Node$\"}[1m]))",
+          "expr": "- sum (rate (container_network_transmit_bytes_total{node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Sent",
@@ -343,7 +343,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\",node=~\"^$Node$\"}[1m])) / sum (machine_cpu_cores{node=~\"^$Node$\"}) * 100 ",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\", node=~\"^$Node$\"}[1m])) / sum (machine_cpu_cores{node=~\"^$Node$\"}) * 100 ",
           "interval": "10s",
           "intervalFactor": 1,
           "range": true,
@@ -678,7 +678,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\",node=~\"^$Node$\"}[1m]))",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{container!=\"\", node=~\"^$Node$\"}[1m]))",
           "interval": "10s",
           "intervalFactor": 1,
           "range": true,
@@ -984,6 +984,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1012,7 +1013,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{image!=\"\",node=~\"^$Node$\"}[1m])) by (node, pod, namespace))",
+          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{image!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }}",
@@ -1039,12 +1040,14 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:138",
           "format": "none",
           "label": "cores",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:139",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1103,6 +1106,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1159,12 +1163,14 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:195",
           "format": "none",
           "label": "cores",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:196",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1225,6 +1231,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1253,7 +1260,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{image!=\"\", container!=\"\", node=~\"^$Node$\"}[1m])) by (container, node, pod, namespace))",
+          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{image!=\"\", container!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (container, node, pod, namespace))",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
@@ -1281,12 +1288,14 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:252",
           "format": "none",
           "label": "cores",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:253",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1342,8 +1351,9 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": false,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1372,7 +1382,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc(sum (rate (container_cpu_usage_seconds_total{id!=\"\", node=~\"^$Node$\"}[1m])) by (id, node, pod, namespace))",
+          "expr": "sort_desc(sum (rate (container_cpu_usage_seconds_total{id!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (id, node, pod, namespace))",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
@@ -1400,12 +1410,14 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:309",
           "format": "none",
           "label": "cores",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:310",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1463,6 +1475,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1491,7 +1504,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (container_memory_working_set_bytes{image!=\"\", node=~\"^$Node$\"}) by (node, pod, namespace))",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{image!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} ",
@@ -1518,11 +1531,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:366",
           "format": "bytes",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:367",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1580,6 +1595,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1635,11 +1651,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:423",
           "format": "bytes",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:424",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1697,6 +1715,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1725,7 +1744,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (container_memory_working_set_bytes{image!=\"\", container!=\"\", node=~\"^$Node$\"}) by (container, node, pod, namespace))",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{image!=\"\", container!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}) by (container, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} | {{ container }}",
@@ -1752,11 +1771,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:480",
           "format": "bytes",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:481",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1812,9 +1833,9 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": false,
+        "rightSide": true,
         "show": true,
-        "sideWidth": 200,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1843,7 +1864,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (container_memory_working_set_bytes{id!=\"\",node=~\"^$Node$\"}) by (id, node, pod, namespace))",
+          "expr": "sort_desc (sum (container_memory_working_set_bytes{id!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}) by (id, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "{{ node }}  ---- {{ namespace }} / {{ pod }} ",
@@ -1870,11 +1891,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:33",
           "format": "bytes",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:34",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1932,6 +1955,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -1960,7 +1984,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (rate (container_network_receive_bytes_total{image!=\"\", node=~\"^$Node$\"}[1m])) by (node, pod, namespace))",
+          "expr": "sort_desc (sum (rate (container_network_receive_bytes_total{image!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "-> pod: {{ namespace }} / {{ pod }}",
@@ -1975,7 +1999,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (- sum (rate (container_network_transmit_bytes_total{image!=\"\", node=~\"^$Node$\"}[1m])) by (node, pod, namespace))",
+          "expr": "sort_desc (- sum (rate (container_network_transmit_bytes_total{image!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "<-  pod: {{ namespace }} / {{ pod }}",
@@ -2002,11 +2026,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:592",
           "format": "Bps",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:593",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -2064,6 +2090,7 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -2092,7 +2119,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum (rate (container_network_transmit_bytes_total{image!=\"\", node=~\"^$Node$\"}[1m])) by (namespace, pod)",
+          "expr": "sum (rate (container_network_transmit_bytes_total{image!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (namespace, pod)",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
@@ -2120,11 +2147,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:649",
           "format": "Bps",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:650",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -2180,9 +2209,9 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": false,
+        "rightSide": true,
         "show": true,
-        "sideWidth": 200,
+        "sideWidth": 850,
         "sort": "current",
         "sortDesc": true,
         "total": false,
@@ -2211,7 +2240,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (sum (rate (container_network_receive_bytes_total{id!=\"\", node=~\"^$Node$\"}[1m])) by (id, node, pod, namespace))",
+          "expr": "sort_desc (sum (rate (container_network_receive_bytes_total{id!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (id, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "-> pod: {{ namespace }} / {{ pod }}",
@@ -2226,7 +2255,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sort_desc (- sum (rate (container_network_transmit_bytes_total{id!=\"\", node=~\"^$Node$\"}[1m])) by (id, node, pod, namespace))",
+          "expr": "sort_desc (- sum (rate (container_network_transmit_bytes_total{id!=\"\", node=~\"^$Node$\", namespace=~\"^$Namespace$\"}[1m])) by (id, node, pod, namespace))",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "<- pod: {{ namespace }} / {{ pod }}",
@@ -2253,11 +2282,13 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:706",
           "format": "Bps",
           "logBase": 1,
           "show": true
         },
         {
+          "$$hashKey": "object:707",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -2302,6 +2333,34 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "definition": "label_values(namespace)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "Namespace",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(namespace)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -2337,6 +2396,6 @@
   "timezone": "browser",
   "title": "Kubernetes - Cluster Monitoring",
   "uid": "Yuvhycvnk",
-  "version": 34,
+  "version": 43,
   "weekStart": ""
 }
