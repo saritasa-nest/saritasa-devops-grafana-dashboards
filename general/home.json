@@ -1256,7 +1256,7 @@
           "showLegend": true,
           "sortBy": "Last *",
           "sortDesc": true,
-          "width": 280
+          "width": 330
         },
         "timezone": [
           "browser"
@@ -1484,7 +1484,7 @@
           "showLegend": true,
           "sortBy": "Last *",
           "sortDesc": true,
-          "width": 280
+          "width": 330
         },
         "timezone": [
           "browser"
@@ -1641,7 +1641,7 @@
       },
       "id": 63,
       "panels": [],
-      "title": "Overview",
+      "title": "Cluster Overview",
       "type": "row"
     },
     {
@@ -1657,7 +1657,7 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 11,
-        "w": 13,
+        "w": 8,
         "x": 0,
         "y": 38
       },
@@ -1671,6 +1671,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
+        "sideWidth": 235,
         "sort": "avg",
         "sortDesc": true,
         "total": false,
@@ -1705,24 +1706,8 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "cluster",
+          "legendFormat": "cpu",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sort_desc (sum (rate (container_cpu_usage_seconds_total{id!=\"\"}[5m])) by (node) / sum (machine_cpu_cores) by (node))",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{ node }}",
-          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1768,123 +1753,13 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "decimals": 2,
-      "editable": true,
-      "error": false,
       "fill": 1,
       "fillGradient": 0,
-      "grid": {},
       "gridPos": {
         "h": 11,
-        "w": 11,
-        "x": 13,
+        "w": 8,
+        "x": 8,
         "y": 38
-      },
-      "height": "200px",
-      "hiddenSeries": false,
-      "id": 18,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "hideEmpty": false,
-        "hideZero": true,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "sideWidth": 300,
-        "sort": "current",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "10.2.2",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "round(sum(irate(nginx_ingress_controller_requests{controller_namespace=~\"ingress-nginx\"}[2m])) by (ingress), 0.001)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "{{ ingress }}",
-          "metric": "network",
-          "refId": "A",
-          "step": 10
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Ingress Request Volume",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 2,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:761",
-          "format": "reqps",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:762",
-          "format": "Bps",
-          "logBase": 1,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 13,
-        "x": 0,
-        "y": 49
       },
       "hiddenSeries": false,
       "id": 12,
@@ -1896,6 +1771,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
+        "sideWidth": 235,
         "sort": "avg",
         "sortDesc": true,
         "total": false,
@@ -1931,24 +1807,8 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "cluster",
+          "legendFormat": "memory",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "(1 - (\n        (\n          sum (node_memory_MemAvailable_bytes{job=\"node-exporter\"}) by (node)\n          or\n          sum (\n            (\n              node_memory_Buffers_bytes{job=\"node-exporter\"}\n              +\n              node_memory_Cached_bytes{job=\"node-exporter\"}\n              +\n              node_memory_MemFree_bytes{job=\"node-exporter\"}\n              +\n              node_memory_Slab_bytes{job=\"node-exporter\"}\n            )\n          ) by (node)\n        )\n      /\n      sum (node_memory_MemTotal_bytes{job=\"node-exporter\"}) by (node)\n    )) * 100",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -1994,124 +1854,6 @@
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "description": "The time spent on receiving the response from the upstream server",
-      "fieldConfig": {
-        "defaults": {
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 11,
-        "x": 13,
-        "y": 49
-      },
-      "hiddenSeries": false,
-      "id": 24,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "10.2.2",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "exemplar": true,
-          "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[2m]\n    )\n  )\n)",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": ".5",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "exemplar": true,
-          "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_response_duration_seconds_bucket{\n      }[2m]\n    )\n  )\n)",
-          "interval": "",
-          "legendFormat": ".95",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[2m]\n    )\n  )\n)",
-          "interval": "",
-          "legendFormat": ".99",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeRegions": [],
-      "title": "Ingress Upstream Response Time",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:993",
-          "format": "s",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:994",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -2120,9 +1862,9 @@
       "grid": {},
       "gridPos": {
         "h": 11,
-        "w": 13,
-        "x": 0,
-        "y": 59
+        "w": 8,
+        "x": 16,
+        "y": 38
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -2221,6 +1963,247 @@
       }
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 49
+      },
+      "id": 77,
+      "panels": [],
+      "title": "Ingress Overview",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 50
+      },
+      "height": "200px",
+      "hiddenSeries": false,
+      "id": 18,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "10.2.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "round(sum(irate(nginx_ingress_controller_requests{controller_namespace=~\"ingress-nginx\"}[2m])) by (ingress), 0.001)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{ ingress }}",
+          "metric": "network",
+          "refId": "A",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Total",
+      "tooltip": {
+        "msResolution": false,
+        "shared": true,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:761",
+          "format": "reqps",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:762",
+          "format": "Bps",
+          "logBase": 1,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "The time spent on receiving the response from the upstream server",
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 50
+      },
+      "hiddenSeries": false,
+      "id": 24,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "10.2.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(\n  0.5,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[2m]\n    )\n  )\n)",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": ".5",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "histogram_quantile(\n  0.95,\n  sum by (le)(\n    rate(\n    nginx_ingress_controller_response_duration_seconds_bucket{\n      }[2m]\n    )\n  )\n)",
+          "interval": "",
+          "legendFormat": ".95",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "histogram_quantile(\n  0.99,\n  sum by (le)(\n    rate(\n      nginx_ingress_controller_response_duration_seconds_bucket{\n      }[2m]\n    )\n  )\n)",
+          "interval": "",
+          "legendFormat": ".99",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Response Time",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:993",
+          "format": "s",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:994",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -2239,10 +2222,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 11,
-        "w": 11,
-        "x": 13,
-        "y": 59
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 50
       },
       "hiddenSeries": false,
       "id": 22,
@@ -2308,7 +2291,7 @@
       ],
       "thresholds": [],
       "timeRegions": [],
-      "title": "Ingress Request Handling Time",
+      "title": "Handling Time",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2339,121 +2322,135 @@
       }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "description": "The number of requests handled by kube-apiserver per second, excluding CONNECT, WATCH, and WATCHLIST",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-YlBl"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 17,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "reqps"
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 16,
+        "h": 1,
         "w": 24,
         "x": 0,
-        "y": 70
+        "y": 59
       },
-      "id": 47,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull",
-            "mean"
+      "id": 78,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "The number of requests handled by kube-apiserver per second, excluding CONNECT, WATCH, and WATCHLIST",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-YlBl"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 17,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 16,
+            "w": 24,
+            "x": 0,
+            "y": 39
+          },
+          "id": 47,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "mean"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
+            },
+            "timezone": [
+              "browser"
+            ],
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "rate(apiserver_request_total{resource!=\"\", group!=\"\", verb!~\"CONNECT|WATCH|WATCHLIST\"}[5m])",
+              "interval": "",
+              "legendFormat": "{{ verb }} {{ resource }}.{{ group }}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "rate(apiserver_request_total{resource!=\"\", group=\"\", verb!~\"CONNECT|WATCH|WATCHLIST\"}[5m])",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{ verb }} {{ resource }}",
+              "range": true,
+              "refId": "B"
+            }
           ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "sortBy": "Last *",
-          "sortDesc": true
-        },
-        "timezone": [
-          "browser"
-        ],
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "rate(apiserver_request_total{resource!=\"\", group!=\"\", verb!~\"CONNECT|WATCH|WATCHLIST\"}[5m])",
-          "interval": "",
-          "legendFormat": "{{ verb }} {{ resource }}.{{ group }}",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "rate(apiserver_request_total{resource!=\"\", group=\"\", verb!~\"CONNECT|WATCH|WATCHLIST\"}[5m])",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "{{ verb }} {{ resource }}",
-          "range": true,
-          "refId": "B"
+          "title": "APIServer Requests",
+          "type": "timeseries"
         }
       ],
       "title": "APIServer Requests",
-      "type": "timeseries"
+      "type": "row"
     },
     {
       "collapsed": false,
@@ -2461,7 +2458,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 86
+        "y": 60
       },
       "id": 65,
       "panels": [],
@@ -2483,7 +2480,7 @@
         "h": 13,
         "w": 7,
         "x": 0,
-        "y": 87
+        "y": 61
       },
       "id": 76,
       "options": {
@@ -2576,7 +2573,7 @@
         "h": 13,
         "w": 6,
         "x": 7,
-        "y": 87
+        "y": 61
       },
       "id": 75,
       "options": {
@@ -2669,7 +2666,7 @@
         "h": 6,
         "w": 11,
         "x": 13,
-        "y": 87
+        "y": 61
       },
       "id": 72,
       "options": {
@@ -2759,7 +2756,7 @@
         "h": 7,
         "w": 11,
         "x": 13,
-        "y": 93
+        "y": 67
       },
       "id": 73,
       "options": {
@@ -2902,7 +2899,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 74
       },
       "id": 37,
       "options": {
@@ -2947,7 +2944,7 @@
         "h": 12,
         "w": 13,
         "x": 0,
-        "y": 109
+        "y": 83
       },
       "id": 32,
       "options": {
@@ -3045,7 +3042,7 @@
         "h": 12,
         "w": 11,
         "x": 13,
-        "y": 109
+        "y": 83
       },
       "id": 41,
       "options": {
@@ -3175,6 +3172,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 4,
+  "version": 10,
   "weekStart": ""
 }
