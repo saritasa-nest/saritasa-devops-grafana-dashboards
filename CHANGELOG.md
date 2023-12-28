@@ -4,36 +4,43 @@
 
 [prod]
 
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/9)
+- Fixed `Kubernetes - cluster overall` dashboard configuration
+
+## 2023-12-26
+
+[prod]
+
 - [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/8)
-- Fixed home dashboard configuration
+- Fixed `Home` dashboard configuration
 
 ## 2023-12-22
 
 [prod]
 
-- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/9)
-- Fixed Kubernetes - cluster overall dashboard configuration
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/7)
+- Fixed `Kubernetes - cluster monitoring` dashboard configuration
 
 ## 2023-12-22
 
 [prod]
 
 - [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/6)
-- Fixed Kubernetes - cluster overview dashboard configuration
+- Fixed `Kubernetes - cluster overview` dashboard configuration
 
 ## 2023-12-18
 
 [prod]
 
 - [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/5)
-- Fixed ArgoCD dashboard configuration
+- Fixed `ArgoCD` dashboard configuration
 
 ## 2023-12-15
 
 [prod]
 
 - [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/4)
-- Fixed alertmanager dashboard configuration
+- Fixed `alertmanager` dashboard configuration
 
 ## 2023-11-23
 
