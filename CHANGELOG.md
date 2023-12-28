@@ -1,5 +1,12 @@
 # Changelog
 
+## 2023-12-26
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/8)
+- Fixed home dashboard configuration
+
 ## 2023-12-22
 
 [prod]
