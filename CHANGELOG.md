@@ -1,5 +1,12 @@
 # Changelog
 
+## 2023-12-28
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/10)
+- Fixed Nginx Ingress Controller dashboard configuration
+
 ## 2023-12-22
 
 [prod]
