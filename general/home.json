@@ -1670,7 +1670,7 @@
         "max": true,
         "min": true,
         "rightSide": true,
-        "show": true,
+        "show": false,
         "sideWidth": 235,
         "sort": "avg",
         "sortDesc": true,
@@ -1770,7 +1770,7 @@
         "max": true,
         "min": true,
         "rightSide": true,
-        "show": true,
+        "show": false,
         "sideWidth": 235,
         "sort": "avg",
         "sortDesc": true,
@@ -2379,8 +2379,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   }
                 ]
               },
@@ -2882,8 +2881,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3026,8 +3024,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3172,6 +3169,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 10,
+  "version": 12,
   "weekStart": ""
 }
