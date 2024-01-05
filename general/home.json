@@ -1454,8 +1454,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1562,8 +1561,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3088,7 +3086,7 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(kube_ingress_tls{tls_host=~\"deploy.*\"}, tls_host)",
+        "definition": "label_values(probe_http_ssl{instance=~\"https://teleport.*\"},instance)",
         "description": "domain of the components",
         "hide": 2,
         "includeAll": false,
@@ -3097,11 +3095,12 @@
         "name": "domain",
         "options": [],
         "query": {
-          "query": "label_values(kube_ingress_tls{tls_host=~\"deploy.*\"}, tls_host)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(probe_http_ssl{instance=~\"https://teleport.*\"},instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "/deploy.(.*)/",
+        "regex": "/https://(.*)/",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
@@ -3117,15 +3116,16 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(argocd_app_info{name=\"root\"}, repo)",
+        "definition": "label_values(argocd_app_info{name=\"addons\"},repo)",
         "hide": 1,
         "includeAll": false,
         "multi": false,
         "name": "kubernetes_repo",
         "options": [],
         "query": {
-          "query": "label_values(argocd_app_info{name=\"root\"}, repo)",
-          "refId": "StandardVariableQuery"
+          "qryType": 1,
+          "query": "label_values(argocd_app_info{name=\"addons\"},repo)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "/git@(.*)/",
@@ -3169,6 +3169,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 12,
+  "version": 14,
   "weekStart": ""
 }
