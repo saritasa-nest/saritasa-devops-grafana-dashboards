@@ -90,7 +90,7 @@
       "title": "Argo-cd",
       "tooltip": "Open ArgoCD UI",
       "type": "link",
-      "url": "https://deploy.$domain/"
+      "url": "https://argo-cd.$domain/"
     },
     {
       "asDropdown": false,
