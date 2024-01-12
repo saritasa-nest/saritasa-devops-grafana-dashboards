@@ -998,7 +998,7 @@
       "type": "stat"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1006,163 +1006,216 @@
         "y": 4
       },
       "id": 59,
-      "panels": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 1,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 75
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 5
+          },
+          "id": 30,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "right",
+              "showLegend": false
+            },
+            "orientation": "auto",
+            "showValue": "always",
+            "stacking": "none",
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 200
+          },
+          "pluginVersion": "10.2.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "(sort_desc(kubelet_volume_stats_used_bytes/kubelet_volume_stats_capacity_bytes))*100>=1",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{ persistentvolumeclaim }}",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "PVC Usage",
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": "OK 🥰",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 75
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 13
+          },
+          "id": 38,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "orientation": "auto",
+            "showValue": "auto",
+            "stacking": "none",
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 0
+          },
+          "pluginVersion": "10.2.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sort(\n\t100-((node_filesystem_avail_bytes{mountpoint=\"/\"} * 100) / node_filesystem_size_bytes) > 10\n)",
+              "format": "time_series",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{ node }} - {{ label_node_kubernetes_io_lifecycle }} - {{label_tech_stack}} > {{ label_workload }}",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Node Disk Usage",
+          "type": "barchart"
+        }
+      ],
       "title": "Storage",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "noValue": "OK 🥰",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.75
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 24,
-        "x": 0,
-        "y": 5
-      },
-      "id": 30,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {
-          "titleSize": 14
-        },
-        "textMode": "value_and_name",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sort_desc(kubelet_volume_stats_used_bytes/kubelet_volume_stats_capacity_bytes)>0.1",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "{{ persistentvolumeclaim }}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "PVC Usage > 10%",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "noValue": "OK 🥰",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 40
-              },
-              {
-                "color": "red",
-                "value": 70
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 24,
-        "x": 0,
-        "y": 10
-      },
-      "id": 38,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "vertical",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {
-          "titleSize": 20
-        },
-        "textMode": "value_and_name",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sort(\n\t100-((node_filesystem_avail_bytes{mountpoint=\"/\"} * 100) / node_filesystem_size_bytes) > 30\n) * ON (node) group_left(\n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle,\n\t\tlabel_ci\n\t) max by (\n\t\tnode, \n\t\tlabel_workload, \n\t\tlabel_apps, \n\t\tlabel_tech_stack, \n\t\tlabel_prometheus, \n\t\tlabel_grafana, \n\t\tlabel_ops, \n\t\tlabel_node_kubernetes_io_lifecycle,\n\t\tlabel_ci\n\t) (kube_node_labels)\n",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "{{ node }} - {{ label_node_kubernetes_io_lifecycle }} - {{label_tech_stack}} > {{ label_workload }}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Node Disk Usage > 30%",
-      "type": "stat"
     },
     {
       "collapsed": false,
@@ -1170,7 +1223,449 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 5
+      },
+      "id": 65,
+      "panels": [],
+      "title": "Problems",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "We only display currently firing alerts with all severities",
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 0,
+        "y": 6
+      },
+      "id": 32,
+      "options": {
+        "alertInstanceLabelFilter": "",
+        "alertName": "",
+        "dashboardAlerts": false,
+        "groupBy": [],
+        "groupMode": "default",
+        "maxItems": 20,
+        "sortOrder": 1,
+        "stateFilter": {
+          "error": true,
+          "firing": true,
+          "noData": false,
+          "normal": false,
+          "pending": false
+        },
+        "viewMode": "list"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "SUM(ALERTS{alertstate=\"firing\"})",
+          "refId": "A"
+        }
+      ],
+      "title": "Firing Alerts",
+      "type": "alertlist"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 5,
+        "x": 8,
+        "y": 6
+      },
+      "id": 75,
+      "options": {
+        "autoSizeColumns": true,
+        "autoSizePolygons": true,
+        "autoSizeRows": true,
+        "compositeConfig": {
+          "animationSpeed": "1500",
+          "composites": [],
+          "enabled": true
+        },
+        "compositeGlobalAliasingEnabled": false,
+        "ellipseCharacters": 18,
+        "ellipseEnabled": false,
+        "globalAutoScaleFonts": true,
+        "globalClickthrough": "",
+        "globalClickthroughCustomTarget": "",
+        "globalClickthroughCustomTargetEnabled": false,
+        "globalClickthroughNewTabEnabled": true,
+        "globalClickthroughSanitizedEnabled": true,
+        "globalDecimals": 0,
+        "globalDisplayMode": "all",
+        "globalDisplayTextTriggeredEmpty": "OK 🥰",
+        "globalFillColor": "dark-red",
+        "globalFontSize": 12,
+        "globalGradientsEnabled": true,
+        "globalOperator": "last",
+        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
+        "globalPolygonBorderSize": 2,
+        "globalPolygonSize": 25,
+        "globalRegexPattern": "",
+        "globalShape": "square",
+        "globalShowTooltipColumnHeadersEnabled": true,
+        "globalShowValueEnabled": true,
+        "globalTextFontAutoColorEnabled": true,
+        "globalTextFontColor": "#000000",
+        "globalTextFontFamily": "Roboto",
+        "globalThresholdsConfig": [],
+        "globalTooltipsEnabled": true,
+        "globalTooltipsFontFamily": "Roboto",
+        "globalTooltipsShowTimestampEnabled": true,
+        "globalUnitFormat": "d",
+        "layoutDisplayLimit": 10,
+        "layoutNumColumns": 8,
+        "layoutNumRows": 8,
+        "overrideConfig": {
+          "overrides": []
+        },
+        "sortByDirection": 3,
+        "sortByField": "value",
+        "tooltipDisplayMode": "all",
+        "tooltipDisplayTextTriggeredEmpty": "OK 🥰",
+        "tooltipPrimarySortByField": "thresholdLevel",
+        "tooltipPrimarySortDirection": 1,
+        "tooltipSecondarySortByField": "value",
+        "tooltipSecondarySortDirection": 1
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "topk(10, round(sort(avg(nginx_ingress_controller_ssl_expire_time_seconds{host!=\"_\"}) by (host) - time()<7*24*3600)/(24*3600)))",
+          "instant": true,
+          "legendFormat": "{{host}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "SSL Certs Expire in less than a week",
+      "transformations": [],
+      "type": "grafana-polystat-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 5,
+        "x": 13,
+        "y": 6
+      },
+      "id": 76,
+      "options": {
+        "autoSizeColumns": true,
+        "autoSizePolygons": true,
+        "autoSizeRows": true,
+        "compositeConfig": {
+          "animationSpeed": "1500",
+          "composites": [],
+          "enabled": true
+        },
+        "compositeGlobalAliasingEnabled": false,
+        "ellipseCharacters": 18,
+        "ellipseEnabled": false,
+        "globalAutoScaleFonts": true,
+        "globalClickthrough": "",
+        "globalClickthroughCustomTarget": "",
+        "globalClickthroughCustomTargetEnabled": false,
+        "globalClickthroughNewTabEnabled": true,
+        "globalClickthroughSanitizedEnabled": true,
+        "globalDecimals": 0,
+        "globalDisplayMode": "all",
+        "globalDisplayTextTriggeredEmpty": "OK 🥰",
+        "globalFillColor": "dark-red",
+        "globalFontSize": 12,
+        "globalGradientsEnabled": true,
+        "globalOperator": "last",
+        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
+        "globalPolygonBorderSize": 2,
+        "globalPolygonSize": 25,
+        "globalRegexPattern": "",
+        "globalShape": "square",
+        "globalShowTooltipColumnHeadersEnabled": true,
+        "globalShowValueEnabled": false,
+        "globalTextFontAutoColorEnabled": true,
+        "globalTextFontColor": "#000000",
+        "globalTextFontFamily": "Roboto",
+        "globalThresholdsConfig": [],
+        "globalTooltipsEnabled": true,
+        "globalTooltipsFontFamily": "Roboto",
+        "globalTooltipsShowTimestampEnabled": true,
+        "globalUnitFormat": "none",
+        "layoutDisplayLimit": 100,
+        "layoutNumColumns": 8,
+        "layoutNumRows": 8,
+        "overrideConfig": {
+          "overrides": []
+        },
+        "sortByDirection": 3,
+        "sortByField": "value",
+        "tooltipDisplayMode": "all",
+        "tooltipDisplayTextTriggeredEmpty": "OK 🥰",
+        "tooltipPrimarySortByField": "thresholdLevel",
+        "tooltipPrimarySortDirection": 1,
+        "tooltipSecondarySortByField": "value",
+        "tooltipSecondarySortDirection": 1
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(argocd_app_info{health_status!~\"Healthy|Progressing\"}) by (name, health_status)",
+          "instant": true,
+          "legendFormat": "{{name}} - {{health_status}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Unhealthy Argocd Apps",
+      "transformations": [],
+      "type": "grafana-polystat-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "See pods reporting OOM events",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "OK 🥰",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 6
+      },
+      "id": 37,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "2.0.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\"}) by (namespace, container)",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{namespace}}/{{container}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "OOM Events",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "The job can fail due to \n- OOM \n- Errors in code \nresulting in BackoffLimitExceeded",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "OK 🥰",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 11
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "kube_job_status_failed{namespace!=\"insights-agent\"} > 0",
+          "legendFormat": "{{namespace}}/{{job_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Failed Jobs Details",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
       },
       "id": 57,
       "panels": [],
@@ -1221,6 +1716,7 @@
               "mode": "dashed+area"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1243,7 +1739,7 @@
         "h": 11,
         "w": 13,
         "x": 0,
-        "y": 16
+        "y": 19
       },
       "id": 48,
       "options": {
@@ -1328,6 +1824,7 @@
               "mode": "dashed+area"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "max": 2,
           "thresholds": {
@@ -1351,7 +1848,7 @@
         "h": 11,
         "w": 11,
         "x": 13,
-        "y": 16
+        "y": 19
       },
       "id": 50,
       "options": {
@@ -1449,12 +1946,14 @@
               "mode": "dashed+area"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1470,7 +1969,7 @@
         "h": 10,
         "w": 13,
         "x": 0,
-        "y": 27
+        "y": 30
       },
       "id": 49,
       "options": {
@@ -1555,13 +2054,15 @@
               "mode": "dashed+area"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "max": 2,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1577,7 +2078,7 @@
         "h": 10,
         "w": 11,
         "x": 13,
-        "y": 27
+        "y": 30
       },
       "id": 51,
       "options": {
@@ -1630,12 +2131,192 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 13,
+        "x": 0,
+        "y": 40
+      },
+      "id": 72,
+      "options": {
+        "autoSizeColumns": true,
+        "autoSizePolygons": true,
+        "autoSizeRows": true,
+        "compositeConfig": {
+          "animationSpeed": "1500",
+          "composites": [],
+          "enabled": true
+        },
+        "compositeGlobalAliasingEnabled": false,
+        "ellipseCharacters": 18,
+        "ellipseEnabled": false,
+        "globalAutoScaleFonts": true,
+        "globalClickthrough": "",
+        "globalClickthroughCustomTarget": "",
+        "globalClickthroughCustomTargetEnabled": false,
+        "globalClickthroughNewTabEnabled": true,
+        "globalClickthroughSanitizedEnabled": true,
+        "globalDecimals": 0,
+        "globalDisplayMode": "all",
+        "globalDisplayTextTriggeredEmpty": "OK",
+        "globalFillColor": "semi-dark-blue",
+        "globalFontSize": 12,
+        "globalGradientsEnabled": true,
+        "globalOperator": "last",
+        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
+        "globalPolygonBorderSize": 10,
+        "globalPolygonSize": 25,
+        "globalRegexPattern": "",
+        "globalShape": "hexagon_pointed_top",
+        "globalShowTooltipColumnHeadersEnabled": true,
+        "globalShowValueEnabled": true,
+        "globalTextFontAutoColorEnabled": true,
+        "globalTextFontColor": "#000000",
+        "globalTextFontFamily": "Roboto",
+        "globalThresholdsConfig": [],
+        "globalTooltipsEnabled": true,
+        "globalTooltipsFontFamily": "Roboto",
+        "globalTooltipsShowTimestampEnabled": true,
+        "globalUnitFormat": "short",
+        "layoutDisplayLimit": 100,
+        "layoutNumColumns": 8,
+        "layoutNumRows": 8,
+        "overrideConfig": {
+          "overrides": []
+        },
+        "sortByDirection": 4,
+        "sortByField": "value",
+        "tooltipDisplayMode": "all",
+        "tooltipDisplayTextTriggeredEmpty": "OK",
+        "tooltipPrimarySortByField": "thresholdLevel",
+        "tooltipPrimarySortDirection": 1,
+        "tooltipSecondarySortByField": "value",
+        "tooltipSecondarySortDirection": 1
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort(topk(10, count by (namespace)(sum by (namespace,pod,container)(kube_pod_container_info{container!=\"\", namespace!~\"ci|kube-system|argo-cd|insights-agent|tekton-pipelines|cert-manager|monitoring|prometheus|velero\"}) unless sum by (namespace,pod,container)(kube_pod_container_resource_limits{resource=\"cpu\"}))))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Containers without CPU Limits",
+      "type": "grafana-polystat-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 11,
+        "x": 13,
+        "y": 40
+      },
+      "id": 73,
+      "options": {
+        "autoSizeColumns": true,
+        "autoSizePolygons": true,
+        "autoSizeRows": true,
+        "compositeConfig": {
+          "animationSpeed": "1500",
+          "composites": [],
+          "enabled": true
+        },
+        "compositeGlobalAliasingEnabled": false,
+        "ellipseCharacters": 18,
+        "ellipseEnabled": false,
+        "globalAutoScaleFonts": true,
+        "globalClickthrough": "",
+        "globalClickthroughCustomTarget": "",
+        "globalClickthroughCustomTargetEnabled": false,
+        "globalClickthroughNewTabEnabled": true,
+        "globalClickthroughSanitizedEnabled": true,
+        "globalDecimals": 0,
+        "globalDisplayMode": "all",
+        "globalDisplayTextTriggeredEmpty": "OK",
+        "globalFillColor": "semi-dark-blue",
+        "globalFontSize": 12,
+        "globalGradientsEnabled": true,
+        "globalOperator": "last",
+        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
+        "globalPolygonBorderSize": 10,
+        "globalPolygonSize": 25,
+        "globalRegexPattern": "",
+        "globalShape": "hexagon_pointed_top",
+        "globalShowTooltipColumnHeadersEnabled": true,
+        "globalShowValueEnabled": true,
+        "globalTextFontAutoColorEnabled": true,
+        "globalTextFontColor": "#000000",
+        "globalTextFontFamily": "Roboto",
+        "globalThresholdsConfig": [],
+        "globalTooltipsEnabled": true,
+        "globalTooltipsFontFamily": "Roboto",
+        "globalTooltipsShowTimestampEnabled": true,
+        "globalUnitFormat": "short",
+        "layoutDisplayLimit": 100,
+        "layoutNumColumns": 8,
+        "layoutNumRows": 8,
+        "overrideConfig": {
+          "overrides": []
+        },
+        "sortByDirection": 4,
+        "sortByField": "value",
+        "tooltipDisplayMode": "all",
+        "tooltipDisplayTextTriggeredEmpty": "OK",
+        "tooltipPrimarySortByField": "thresholdLevel",
+        "tooltipPrimarySortDirection": 1,
+        "tooltipSecondarySortByField": "value",
+        "tooltipSecondarySortDirection": 1
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sort(topk(10, count by (namespace)(sum by (namespace,pod,container)(kube_pod_container_info{container!=\"\", namespace!~\"ci|kube-system|argo-cd|insights-agent|tekton-pipelines|cert-manager|monitoring|prometheus|velero\"}) unless sum by (namespace,pod,container)(kube_pod_container_resource_limits{resource=\"memory\"}))))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Containers without Memory Limits",
+      "type": "grafana-polystat-panel"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 47
       },
       "id": 63,
       "panels": [],
@@ -1657,7 +2338,7 @@
         "h": 11,
         "w": 8,
         "x": 0,
-        "y": 38
+        "y": 48
       },
       "hiddenSeries": false,
       "id": 14,
@@ -1757,7 +2438,7 @@
         "h": 11,
         "w": 8,
         "x": 8,
-        "y": 38
+        "y": 48
       },
       "hiddenSeries": false,
       "id": 12,
@@ -1862,7 +2543,7 @@
         "h": 11,
         "w": 8,
         "x": 16,
-        "y": 38
+        "y": 48
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -1966,7 +2647,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 59
       },
       "id": 77,
       "panels": [],
@@ -1992,7 +2673,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 50
+        "y": 60
       },
       "height": "200px",
       "hiddenSeries": false,
@@ -2105,7 +2786,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 50
+        "y": 60
       },
       "hiddenSeries": false,
       "id": 24,
@@ -2223,7 +2904,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 50
+        "y": 60
       },
       "hiddenSeries": false,
       "id": 22,
@@ -2325,7 +3006,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 69
       },
       "id": 78,
       "panels": [
@@ -2448,636 +3129,15 @@
       ],
       "title": "APIServer Requests",
       "type": "row"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 60
-      },
-      "id": 65,
-      "panels": [],
-      "title": "Problems",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": []
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 13,
-        "w": 7,
-        "x": 0,
-        "y": 61
-      },
-      "id": 76,
-      "options": {
-        "autoSizeColumns": true,
-        "autoSizePolygons": true,
-        "autoSizeRows": true,
-        "compositeConfig": {
-          "animationSpeed": "1500",
-          "composites": [],
-          "enabled": true
-        },
-        "compositeGlobalAliasingEnabled": false,
-        "ellipseCharacters": 18,
-        "ellipseEnabled": false,
-        "globalAutoScaleFonts": true,
-        "globalClickthrough": "",
-        "globalClickthroughCustomTarget": "",
-        "globalClickthroughCustomTargetEnabled": false,
-        "globalClickthroughNewTabEnabled": true,
-        "globalClickthroughSanitizedEnabled": true,
-        "globalDecimals": 0,
-        "globalDisplayMode": "all",
-        "globalDisplayTextTriggeredEmpty": "OK 🥰",
-        "globalFillColor": "dark-red",
-        "globalFontSize": 12,
-        "globalGradientsEnabled": true,
-        "globalOperator": "last",
-        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
-        "globalPolygonBorderSize": 2,
-        "globalPolygonSize": 25,
-        "globalRegexPattern": "",
-        "globalShape": "square",
-        "globalShowTooltipColumnHeadersEnabled": true,
-        "globalShowValueEnabled": false,
-        "globalTextFontAutoColorEnabled": true,
-        "globalTextFontColor": "#000000",
-        "globalTextFontFamily": "Roboto",
-        "globalThresholdsConfig": [],
-        "globalTooltipsEnabled": true,
-        "globalTooltipsFontFamily": "Roboto",
-        "globalTooltipsShowTimestampEnabled": true,
-        "globalUnitFormat": "none",
-        "layoutDisplayLimit": 100,
-        "layoutNumColumns": 8,
-        "layoutNumRows": 8,
-        "overrideConfig": {
-          "overrides": []
-        },
-        "sortByDirection": 3,
-        "sortByField": "value",
-        "tooltipDisplayMode": "all",
-        "tooltipDisplayTextTriggeredEmpty": "OK 🥰",
-        "tooltipPrimarySortByField": "thresholdLevel",
-        "tooltipPrimarySortDirection": 1,
-        "tooltipSecondarySortByField": "value",
-        "tooltipSecondarySortDirection": 1
-      },
-      "pluginVersion": "2.1.5",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count(argocd_app_info{health_status!~\"Healthy|Progressing\"}) by (name, health_status)",
-          "instant": true,
-          "legendFormat": "{{name}} - {{health_status}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Unhealthy Argocd Apps",
-      "transformations": [],
-      "type": "grafana-polystat-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": []
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 13,
-        "w": 6,
-        "x": 7,
-        "y": 61
-      },
-      "id": 75,
-      "options": {
-        "autoSizeColumns": true,
-        "autoSizePolygons": true,
-        "autoSizeRows": true,
-        "compositeConfig": {
-          "animationSpeed": "1500",
-          "composites": [],
-          "enabled": true
-        },
-        "compositeGlobalAliasingEnabled": false,
-        "ellipseCharacters": 18,
-        "ellipseEnabled": false,
-        "globalAutoScaleFonts": true,
-        "globalClickthrough": "",
-        "globalClickthroughCustomTarget": "",
-        "globalClickthroughCustomTargetEnabled": false,
-        "globalClickthroughNewTabEnabled": true,
-        "globalClickthroughSanitizedEnabled": true,
-        "globalDecimals": 0,
-        "globalDisplayMode": "all",
-        "globalDisplayTextTriggeredEmpty": "OK 🥰",
-        "globalFillColor": "dark-red",
-        "globalFontSize": 12,
-        "globalGradientsEnabled": true,
-        "globalOperator": "last",
-        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
-        "globalPolygonBorderSize": 2,
-        "globalPolygonSize": 25,
-        "globalRegexPattern": "",
-        "globalShape": "square",
-        "globalShowTooltipColumnHeadersEnabled": true,
-        "globalShowValueEnabled": true,
-        "globalTextFontAutoColorEnabled": true,
-        "globalTextFontColor": "#000000",
-        "globalTextFontFamily": "Roboto",
-        "globalThresholdsConfig": [],
-        "globalTooltipsEnabled": true,
-        "globalTooltipsFontFamily": "Roboto",
-        "globalTooltipsShowTimestampEnabled": true,
-        "globalUnitFormat": "d",
-        "layoutDisplayLimit": 10,
-        "layoutNumColumns": 8,
-        "layoutNumRows": 8,
-        "overrideConfig": {
-          "overrides": []
-        },
-        "sortByDirection": 3,
-        "sortByField": "value",
-        "tooltipDisplayMode": "all",
-        "tooltipDisplayTextTriggeredEmpty": "OK 🥰",
-        "tooltipPrimarySortByField": "thresholdLevel",
-        "tooltipPrimarySortDirection": 1,
-        "tooltipSecondarySortByField": "value",
-        "tooltipSecondarySortDirection": 1
-      },
-      "pluginVersion": "2.1.5",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "topk(10, round(sort(avg(nginx_ingress_controller_ssl_expire_time_seconds{host!=\"_\"}) by (host) - time()<7*24*3600)/(24*3600)))",
-          "instant": true,
-          "legendFormat": "{{host}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "SSL Certs Expire in less than a week",
-      "transformations": [],
-      "type": "grafana-polystat-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": []
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 11,
-        "x": 13,
-        "y": 61
-      },
-      "id": 72,
-      "options": {
-        "autoSizeColumns": true,
-        "autoSizePolygons": true,
-        "autoSizeRows": true,
-        "compositeConfig": {
-          "animationSpeed": "1500",
-          "composites": [],
-          "enabled": true
-        },
-        "compositeGlobalAliasingEnabled": false,
-        "ellipseCharacters": 18,
-        "ellipseEnabled": false,
-        "globalAutoScaleFonts": true,
-        "globalClickthrough": "",
-        "globalClickthroughCustomTarget": "",
-        "globalClickthroughCustomTargetEnabled": false,
-        "globalClickthroughNewTabEnabled": true,
-        "globalClickthroughSanitizedEnabled": true,
-        "globalDecimals": 0,
-        "globalDisplayMode": "all",
-        "globalDisplayTextTriggeredEmpty": "OK",
-        "globalFillColor": "semi-dark-blue",
-        "globalFontSize": 12,
-        "globalGradientsEnabled": true,
-        "globalOperator": "last",
-        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
-        "globalPolygonBorderSize": 10,
-        "globalPolygonSize": 25,
-        "globalRegexPattern": "",
-        "globalShape": "hexagon_pointed_top",
-        "globalShowTooltipColumnHeadersEnabled": true,
-        "globalShowValueEnabled": true,
-        "globalTextFontAutoColorEnabled": true,
-        "globalTextFontColor": "#000000",
-        "globalTextFontFamily": "Roboto",
-        "globalThresholdsConfig": [],
-        "globalTooltipsEnabled": true,
-        "globalTooltipsFontFamily": "Roboto",
-        "globalTooltipsShowTimestampEnabled": true,
-        "globalUnitFormat": "short",
-        "layoutDisplayLimit": 100,
-        "layoutNumColumns": 8,
-        "layoutNumRows": 8,
-        "overrideConfig": {
-          "overrides": []
-        },
-        "sortByDirection": 4,
-        "sortByField": "value",
-        "tooltipDisplayMode": "all",
-        "tooltipDisplayTextTriggeredEmpty": "OK",
-        "tooltipPrimarySortByField": "thresholdLevel",
-        "tooltipPrimarySortDirection": 1,
-        "tooltipSecondarySortByField": "value",
-        "tooltipSecondarySortDirection": 1
-      },
-      "pluginVersion": "2.1.5",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sort(topk(10, count by (namespace)(sum by (namespace,pod,container)(kube_pod_container_info{container!=\"\", namespace!~\"ci|kube-system|argo-cd|insights-agent|tekton-pipelines|cert-manager|monitoring|prometheus|velero\"}) unless sum by (namespace,pod,container)(kube_pod_container_resource_limits{resource=\"cpu\"}))))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Containers without CPU Limits",
-      "type": "grafana-polystat-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": []
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 11,
-        "x": 13,
-        "y": 67
-      },
-      "id": 73,
-      "options": {
-        "autoSizeColumns": true,
-        "autoSizePolygons": true,
-        "autoSizeRows": true,
-        "compositeConfig": {
-          "animationSpeed": "1500",
-          "composites": [],
-          "enabled": true
-        },
-        "compositeGlobalAliasingEnabled": false,
-        "ellipseCharacters": 18,
-        "ellipseEnabled": false,
-        "globalAutoScaleFonts": true,
-        "globalClickthrough": "",
-        "globalClickthroughCustomTarget": "",
-        "globalClickthroughCustomTargetEnabled": false,
-        "globalClickthroughNewTabEnabled": true,
-        "globalClickthroughSanitizedEnabled": true,
-        "globalDecimals": 0,
-        "globalDisplayMode": "all",
-        "globalDisplayTextTriggeredEmpty": "OK",
-        "globalFillColor": "semi-dark-blue",
-        "globalFontSize": 12,
-        "globalGradientsEnabled": true,
-        "globalOperator": "last",
-        "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
-        "globalPolygonBorderSize": 10,
-        "globalPolygonSize": 25,
-        "globalRegexPattern": "",
-        "globalShape": "hexagon_pointed_top",
-        "globalShowTooltipColumnHeadersEnabled": true,
-        "globalShowValueEnabled": true,
-        "globalTextFontAutoColorEnabled": true,
-        "globalTextFontColor": "#000000",
-        "globalTextFontFamily": "Roboto",
-        "globalThresholdsConfig": [],
-        "globalTooltipsEnabled": true,
-        "globalTooltipsFontFamily": "Roboto",
-        "globalTooltipsShowTimestampEnabled": true,
-        "globalUnitFormat": "short",
-        "layoutDisplayLimit": 100,
-        "layoutNumColumns": 8,
-        "layoutNumRows": 8,
-        "overrideConfig": {
-          "overrides": []
-        },
-        "sortByDirection": 4,
-        "sortByField": "value",
-        "tooltipDisplayMode": "all",
-        "tooltipDisplayTextTriggeredEmpty": "OK",
-        "tooltipPrimarySortByField": "thresholdLevel",
-        "tooltipPrimarySortDirection": 1,
-        "tooltipSecondarySortByField": "value",
-        "tooltipSecondarySortDirection": 1
-      },
-      "pluginVersion": "2.1.5",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sort(topk(10, count by (namespace)(sum by (namespace,pod,container)(kube_pod_container_info{container!=\"\", namespace!~\"ci|kube-system|argo-cd|insights-agent|tekton-pipelines|cert-manager|monitoring|prometheus|velero\"}) unless sum by (namespace,pod,container)(kube_pod_container_resource_limits{resource=\"memory\"}))))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Containers without Memory Limits",
-      "type": "grafana-polystat-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "description": "See pods reporting OOM events",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisGridShow": false,
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "points",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "noValue": "OK 🥰",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 74
-      },
-      "id": 37,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "2.0.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(kube_pod_container_status_last_terminated_reason{reason=\"OOMKilled\"}) by (namespace, container)",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{namespace}}/{{container}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "OOM Events",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "description": "We only display currently firing alerts with all severities",
-      "gridPos": {
-        "h": 12,
-        "w": 13,
-        "x": 0,
-        "y": 83
-      },
-      "id": 32,
-      "options": {
-        "alertInstanceLabelFilter": "",
-        "alertName": "",
-        "dashboardAlerts": false,
-        "groupBy": [],
-        "groupMode": "default",
-        "maxItems": 20,
-        "sortOrder": 1,
-        "stateFilter": {
-          "error": true,
-          "firing": true,
-          "noData": false,
-          "normal": false,
-          "pending": false
-        },
-        "viewMode": "list"
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "SUM(ALERTS{alertstate=\"firing\"})",
-          "refId": "A"
-        }
-      ],
-      "title": "Firing Alerts",
-      "type": "alertlist"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "description": "The job can fail due to \n- OOM \n- Errors in code \nresulting in BackoffLimitExceeded",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-RdYlGr"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "OK 🥰",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 11,
-        "x": 13,
-        "y": 83
-      },
-      "id": 41,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "kube_job_status_failed{namespace!=\"insights-agent\"} > 0",
-          "legendFormat": "{{namespace}}/{{job_name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Failed Jobs Details",
-      "type": "timeseries"
     }
   ],
-  "refresh": "1m",
+  "refresh": "5m",
   "schemaVersion": 38,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "isNone": true,
           "selected": false,
           "text": "None",
           "value": ""
@@ -3107,7 +3167,6 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
           "text": "None",
           "value": ""
@@ -3136,7 +3195,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -3169,6 +3228,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "sSAXTzv7z",
-  "version": 14,
+  "version": 16,
   "weekStart": ""
 }
