@@ -303,7 +303,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<h3 style='color:#e68a00;font-weight:bold;text-align:center'>${redis_os}: ${redis_version}</h3>\n<h3 style='color:#e68a00;font-weight:bold;text-align:center'>${redis_mode} ${redis_role}</h3>",
+        "content": "<h3 style='color:#e68a00;font-weight:bold;text-align:center'>${instance}</h3>\n<h3 style='color:#e68a00;font-weight:bold;text-align:center'>${redis_os}: ${redis_version}</h3>\n<h3 style='color:#e68a00;font-weight:bold;text-align:center'>${redis_mode} ${redis_role}</h3>",
         "mode": "markdown"
       },
       "pluginVersion": "9.3.1",
@@ -1347,8 +1347,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1441,8 +1440,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1502,8 +1500,8 @@
       {
         "current": {
           "selected": false,
-          "text": "sportsthread-staging-redis.zpaeuz.0001.usw2.cache.amazonaws.com",
-          "value": "sportsthread-staging-redis.zpaeuz.0001.usw2.cache.amazonaws.com"
+          "text": "redis://sportsthread-staging-redis.zpaeuz.0001.usw2.cache.amazonaws.com:6379",
+          "value": "redis://sportsthread-staging-redis.zpaeuz.0001.usw2.cache.amazonaws.com:6379"
         },
         "datasource": {
           "type": "prometheus",
@@ -1520,7 +1518,7 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
-        "regex": "redis://(?<value>.*):6379",
+        "regex": "^redis.*",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
@@ -1530,10 +1528,9 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "6.2.6",
+          "value": "6.2.6"
         },
         "datasource": {
           "type": "prometheus",
@@ -1557,10 +1554,13 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "Amazon ElastiCache",
+          "value": "Amazon ElastiCache"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
         },
         "definition": "label_values(redis_instance_info{instance=~\"$instance\"}, os)",
         "hide": 2,
@@ -1580,10 +1580,13 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "master",
+          "value": "master"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
         },
         "definition": "label_values(redis_instance_info{instance=~\"$instance\"}, role)",
         "hide": 2,
@@ -1603,10 +1606,13 @@
       },
       {
         "current": {
-          "isNone": true,
           "selected": false,
-          "text": "None",
-          "value": ""
+          "text": "standalone",
+          "value": "standalone"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
         },
         "definition": "label_values(redis_instance_info{instance=~\"$instance\"}, redis_mode)",
         "hide": 2,
@@ -1672,7 +1678,7 @@
       "30d"
     ]
   },
-  "timezone": "",
+  "timezone": "browser",
   "title": "Redis Instance Summary",
   "uid": "redis-instance-summary",
   "version": 1,
