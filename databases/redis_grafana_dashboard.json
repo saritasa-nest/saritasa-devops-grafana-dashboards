@@ -506,7 +506,7 @@
           "expr": "rate(redis_net_input_bytes_total{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{ input }}",
+          "legendFormat": "input-{{instance}}",
           "refId": "A",
           "step": 240
         },
