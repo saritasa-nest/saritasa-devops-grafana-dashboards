@@ -519,7 +519,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{ output }}",
+          "legendFormat": "output-{{instance}}",
           "refId": "B",
           "step": 240
         }
