@@ -32,6 +32,116 @@
     "liveNow": false,
     "panels": [
     {
+        "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+            "defaults": {
+                "color": {
+                    "mode": "continuous-GrYlRd",
+                    "seriesBy": "last"
+                },
+                "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "left",
+                    "axisSoftMax": 100,
+                    "barAlignment": 0,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "opacity",
+                    "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "smooth",
+                    "lineStyle": {
+                        "fill": "solid"
+                    },
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                        "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "spanNulls": true,
+                    "stacking": {
+                        "group": "A",
+                        "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                        "mode": "dashed"
+                    }
+                },
+                "mappings": [],
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {
+                            "color": "green"
+                        },
+                        {
+                            "color": "red",
+                            "value": 90
+                        }
+                    ]
+                },
+                "unit": "s"
+            },
+            "overrides": []
+        },
+        "gridPos": {
+            "h": 11,
+            "w": 11,
+            "x": 0,
+            "y": 0
+        },
+        "id": 48,
+        "options": {
+            "legend": {
+                "calcs": [
+                    "lastNotNull"
+                ],
+                "displayMode": "table",
+                "placement": "bottom",
+                "showLegend": true,
+                "sortBy": "Last *",
+                "sortDesc": true,
+                "width": 280
+            },
+            "timezone": [
+                "browser"
+            ],
+            "tooltip": {
+                "mode": "multi",
+                "sort": "none"
+            }
+        },
+        "pluginVersion": "9.3.1",
+        "targets": [
+            {
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus"
+                },
+                "editorMode": "code",
+                "expr": "max(kube_pod_status_ready_time{namespace=\"$namespace\"}-kube_pod_created{namespace=\"$namespace\"}) by (pod)",
+                "interval": "",
+                "legendFormat": "__auto",
+                "range": true,
+                "refId": "A"
+            }
+        ],
+        "title": "Pod start time",
+        "type": "timeseries"
+    },
+    {
         "collapsed": false,
         "datasource": "prometheus",
         "gridPos": {
