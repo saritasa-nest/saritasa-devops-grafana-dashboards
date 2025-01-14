@@ -32,114 +32,81 @@
     "liveNow": false,
     "panels": [
     {
+    "type": "stat",
+    "title": "Deployment start time",
+    "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 8
+    },
+    "datasource": {
+        "uid": "prometheus",
+        "type": "prometheus"
+    },
+    "id": 105,
+    "targets": [
+        {
         "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
         },
-        "description": "",
-        "fieldConfig": {
-            "defaults": {
-                "color": {
-                    "mode": "continuous-GrYlRd",
-                    "seriesBy": "last"
-                },
-                "custom": {
-                    "axisBorderShow": false,
-                    "axisCenteredZero": false,
-                    "axisColorMode": "text",
-                    "axisLabel": "",
-                    "axisPlacement": "left",
-                    "axisSoftMax": 100,
-                    "barAlignment": 0,
-                    "drawStyle": "line",
-                    "fillOpacity": 0,
-                    "gradientMode": "opacity",
-                    "hideFrom": {
-                        "legend": false,
-                        "tooltip": false,
-                        "viz": false
-                    },
-                    "insertNulls": false,
-                    "lineInterpolation": "smooth",
-                    "lineStyle": {
-                        "fill": "solid"
-                    },
-                    "lineWidth": 1,
-                    "pointSize": 5,
-                    "scaleDistribution": {
-                        "type": "linear"
-                    },
-                    "showPoints": "never",
-                    "spanNulls": true,
-                    "stacking": {
-                        "group": "A",
-                        "mode": "none"
-                    },
-                    "thresholdsStyle": {
-                        "mode": "dashed"
-                    }
-                },
-                "mappings": [],
-                "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                        {
-                            "color": "green"
-                        },
-                        {
-                            "color": "red",
-                            "value": 60
-                        }
-                    ]
-                },
-                "unit": "s"
-            },
-            "overrides": []
-        },
-        "gridPos": {
-            "h": 11,
-            "w": 11,
-            "x": 0,
-            "y": 0
-        },
-        "id": 48,
-        "options": {
-            "legend": {
-                "calcs": [
-                    "lastNotNull"
-                ],
-                "displayMode": "table",
-                "placement": "bottom",
-                "showLegend": true,
-                "sortBy": "Last *",
-                "sortDesc": true,
-                "width": 280
-            },
-            "timezone": [
-                "browser"
-            ],
-            "tooltip": {
-                "mode": "multi",
-                "sort": "none"
-            }
-        },
-        "pluginVersion": "9.3.1",
-        "targets": [
-            {
-                "datasource": {
-                    "type": "prometheus",
-                    "uid": "prometheus"
-                },
-                "editorMode": "code",
-                "expr": "max(kube_pod_status_ready_time{namespace=\"$namespace\"}-kube_pod_created{namespace=\"$namespace\"}) by (pod)",
-                "interval": "",
-                "legendFormat": "__auto",
-                "range": true,
-                "refId": "A"
-            }
+        "refId": "A",
+        "expr": "sum by (label_app_kubernetes_io_name, namespace) (\n  (\n    max by (pod, namespace) (kube_pod_status_container_ready_time{pod!=\"\", namespace=\"$namespace\"})\n    - min by (pod, namespace) (kube_pod_container_state_started{})\n  )\n  * on (pod) group_left(label_app_kubernetes_io_name) kube_pod_labels\n)",
+        "range": false,
+        "instant": true,
+        "editorMode": "code",
+        "legendFormat": "{{label_app_kubernetes_io_name}}",
+        "format": "time_series",
+        "exemplar": false
+        }
+    ],
+    "options": {
+        "reduceOptions": {
+        "values": false,
+        "calcs": [
+            "lastNotNull"
         ],
-        "title": "Pod start time",
-        "type": "timeseries"
+        "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false,
+        "text": {}
+    },
+    "fieldConfig": {
+        "defaults": {
+        "mappings": [],
+        "thresholds": {
+            "mode": "absolute",
+            "steps": [
+            {
+                "color": "green",
+                "value": null
+            },
+            {
+                "value": 50,
+                "color": "#EAB839"
+            },
+            {
+                "color": "red",
+                "value": 80
+            }
+            ]
+        },
+        "color": {
+            "mode": "thresholds"
+        },
+        "unit": "dtdurations",
+        "fieldMinMax": false
+        },
+        "overrides": []
+    },
+    "pluginVersion": "10.4.0"
     },
     {
         "collapsed": false,
