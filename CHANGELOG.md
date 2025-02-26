@@ -1,5 +1,12 @@
 # Changelog
 
+## 2025-01-03
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/12)
+- Add pod start time panel
+
 ## 2024-04-15
 
 [prod]
