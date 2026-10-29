@@ -3579,7 +3579,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "go_gc_duration_seconds{app_kubernetes_io_name=\"argocd-server-metrics\", quantile=\"1\", namespace=~\"$namespace\"}",
+          "expr": "go_gc_duration_seconds{app_kubernetes_io_name=\"argocd-server-metrics\", quantile=~\"1(\\\\.0)?\", namespace=~\"$namespace\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,

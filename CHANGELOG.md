@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-20
+
+[prod]
+
+- [associated PR](https://github.com/saritasa-nest/saritasa-devops-grafana-dashboards/pull/16)
+- Fix ArgoCD "GC Time Quantiles" panel for Prometheus 3.x `quantile` label normalization (`1` -> `1.0`)
+
 ## 2025-01-03
 
 [prod]
